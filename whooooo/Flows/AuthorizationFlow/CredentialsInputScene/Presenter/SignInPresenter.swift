@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol SignInPresenterDelegate {
     
@@ -24,7 +25,10 @@ class SignInPresenter: CredentialInputPresenter {
     }
     
     func confirmTapWithContent(_ email: String, password: String) {
-        
+        self.service.signInCredentials(email: email, password: password) { [weak self] (error) in
+            guard error == nil else { return }
+            self?.confirmationCompletion()
+        }
     }
     
 }

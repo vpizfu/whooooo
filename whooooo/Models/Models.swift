@@ -13,6 +13,7 @@ struct VoteObject: Codable {
     let identifier: String
     let firstItem: String
     let secondItem: String
+    let active: Bool
     
 //    enum CodingKeys: String, CodingKey {
 //        case name

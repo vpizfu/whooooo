@@ -25,15 +25,41 @@ class AuthFlowCoordinator: Coordinator {
         self.delegate = delegate
     }
     
-    func start() {        
-        let presenter = SignUpPresenter(service: AuthenticationManager())
-        let controller = CredentialInputViewController(presenter: presenter)
+    func start() {
+        let presenter = InitialCredentialsPresenter()
+        let controller = InitialCredentialsViewController(presenter: presenter)
+
+        presenter.signInCompletion = {
+            self.startSignInScene()
+        }
         
+        presenter.signUpCompletion = {
+            self.startSignUpScene()
+        }
+        
+        self.navigationController.setViewControllers([controller], animated: true)
+    }
+    
+    func startSignInScene() {
+        let presenter = SignInPresenter(service: AuthenticationManager())
+        let controller = CredentialInputViewController(presenter: presenter)
         presenter.confirmationCompletion = { [weak self] in
             self?.delegate?.userDidAuthenticate()
         }
-        
         self.navigationController.pushViewController(controller, animated: true)
-        controller.hideNavigationBar()        
+        controller.showNavigationBar()
+        
     }
+    
+    func startSignUpScene() {
+        let presenter = SignUpPresenter(service: AuthenticationManager())
+        let controller = CredentialInputViewController(presenter: presenter)
+        presenter.confirmationCompletion = { [weak self] in
+            self?.delegate?.userDidAuthenticate()
+        }
+        self.navigationController.pushViewController(controller, animated: true)
+        controller.showNavigationBar()
+    }
+    
+    
 }

@@ -7,28 +7,43 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol AuthenticationService {
-    
     func isUserAuthenticated() -> Bool
-    func setupIdentifier(_ identifier: String)
+    func signInCredentials(email: String, password: String, completion: @escaping (Error?) -> ())
+    func signUpCredentials(email: String, password: String, completion: @escaping (Error?) -> ())
     func currentUserIdentifier() -> String?
-    
+    func signOut()
 }
 
 
 class AuthenticationManager: AuthenticationService {
     
-    func isUserAuthenticated() -> Bool {
-        return UserDefaults.standard.value(forKey: "authVerificationID") != nil
+    private let key: String = "authVerificationID"
+    
+    func signInCredentials(email: String, password: String, completion: @escaping (Error?) -> ()) {
+        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+            completion(error)
+        }
     }
     
-    func setupIdentifier(_ identifier: String) {
-        UserDefaults.standard.setValue(identifier, forKey: "authVerificationID")
+    func signUpCredentials(email: String, password: String, completion: @escaping (Error?) -> ()) {
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            completion(error)
+        }
+    }
+    
+    func isUserAuthenticated() -> Bool {
+        return Auth.auth().currentUser != nil
     }
     
     func currentUserIdentifier() -> String? {
-        return UserDefaults.standard.string(forKey: "authVerificationID")
+        return Auth.auth().currentUser?.uid
+    }
+    
+    func signOut() {
+        try! Auth.auth().signOut()
     }
     
 }

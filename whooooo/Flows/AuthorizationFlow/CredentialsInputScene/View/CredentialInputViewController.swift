@@ -22,6 +22,7 @@ class CredentialInputViewController: BaseViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.keyboardType = .emailAddress
         view.borderStyle = .roundedRect
+        view.placeholder = "Email"
         return view
     }()
     
@@ -29,7 +30,8 @@ class CredentialInputViewController: BaseViewController {
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isSecureTextEntry = true
-        view.borderStyle = .roundedRect        
+        view.borderStyle = .roundedRect
+        view.placeholder = "Password"
         return view
     }()
     

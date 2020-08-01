@@ -17,9 +17,9 @@ class FirebaseAccess {
     
     let ref: DatabaseReference = Database.database().reference()
     
-    func getDataOnBranch(_ branch: Branch, completion: @escaping ([String: [String : String]]) -> ()) {
+    func getDataOnBranch(_ branch: Branch, completion: @escaping ([String: [String : AnyObject]]) -> ()) {
         ref.child(branch.rawValue).observe(.value) { snapshot in
-            completion(snapshot.value as! [String: [String: String]])
+            completion(snapshot.value as! [String: [String: AnyObject]])
         }
     }
 }

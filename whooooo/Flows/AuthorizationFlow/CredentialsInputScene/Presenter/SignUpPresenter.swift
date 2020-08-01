@@ -30,13 +30,9 @@ class SignUpPresenter: CredentialInputPresenter {
     
     // TODO: input validation
     func confirmTapWithContent(_ email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self,
-                let uid = authResult?.user.uid,
-                error == nil else { return }
-            
-            strongSelf.service.setupIdentifier(uid)
-            strongSelf.confirmationCompletion()
+        self.service.signUpCredentials(email: email, password: password) { [weak self] (error) in
+            guard error == nil else { return }
+            self?.confirmationCompletion()
         }
     }
     
