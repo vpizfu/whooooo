@@ -23,6 +23,7 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
 
     private var imageUrlOne: String? = null
     private var imageUrlTwo: String? = null
+    private var voteId: String? = null
 
     private val presenter by moxyPresenter { VoteDetailPresenter() }
 
@@ -32,6 +33,7 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
             val vote: VoteEvent? = arguments?.getParcelable<VoteEvent>(VOTE_KEY)
             imageUrlOne = vote?.one
             imageUrlTwo = vote?.two
+            voteId = vote?.id
         }
     }
 
@@ -57,8 +59,11 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
             .load(imageUrlTwo)
             .centerCrop()
             .into(binding.imageTwo)
-
-        val database = Firebase.database.getReference("votesCount")
+        binding.imageTwo.setOnClickListener {
+            val database = Firebase.database.reference
+            val query = database.child("voteCounterTest").child("voteObject").child("voteObjectId").equalTo(voteId)
+            database.child("voteCounterTest").child("voteObject").child("voteObjectId").setValue(voteId)
+        }
     }
 
     override fun onDestroy() {
