@@ -5,15 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.islery.whooooo.R
 import com.islery.whooooo.data.model.VoteEvent
 import com.islery.whooooo.databinding.FragmentVoteListBinding
+import com.islery.whooooo.databinding.VoteRowBinding
 import kotlinx.android.synthetic.main.fragment_vote_list.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
+const val VOTE_KEY = "vote_key"
 class VoteListFragment : MvpAppCompatFragment(), VoteListView {
+
+    private var _voteRowBinding: VoteRowBinding? = null
+    private val voteRowBinding get() = _voteRowBinding
 
     private var _binding: FragmentVoteListBinding? = null
     private val binding get() = _binding!!
@@ -50,6 +58,8 @@ class VoteListFragment : MvpAppCompatFragment(), VoteListView {
     }
 
     override fun showNextView(vote: VoteEvent) {
+        val bundle = bundleOf(VOTE_KEY to vote)
+        findNavController().navigate(R.id.action_voteListFragment_to_voteDetailFragment, bundle)
         Toast.makeText(requireContext(), "Next view ${vote.name}", Toast.LENGTH_SHORT).show()
     }
 

@@ -14,6 +14,7 @@
             android:id="@+id/action_voteListFragment_to_voteDetailFragment"
             app:destination="@id/voteDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/voteDetailFragment"
         android:name="com.islery.whooooo.ui.vote.detail.VoteDetailFragment"
@@ -22,5 +23,8 @@
         <action
             android:id="@+id/action_voteDetailFragment_to_voteListFragment"
             app:destination="@id/voteListFragment" />
+        <argument
+            android:name="vote"
+            app:argType="com.islery.whooooo.data.model.VoteEvent" />
     </fragment>
 </navigation>
