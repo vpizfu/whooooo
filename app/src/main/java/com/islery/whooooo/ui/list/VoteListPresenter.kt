@@ -9,7 +9,7 @@ import moxy.MvpPresenter
 class VoteListPresenter : MvpPresenter<VoteListView>() {
 
     fun getData(){
-        viewState.setData(listOf(VoteEvent("Fake Event", "https://memepedia.ru/wp-content/uploads/2019/06/odna-zhenschina-plachet-drugaya-obnimaet.jpg","https://memepedia.ru/wp-content/uploads/2019/06/ozadachennyy-kot-sidit-za-stolom-6.jpg")))
+        viewState.setData(listOf(VoteEvent(name = "Fake Event", one = "https://memepedia.ru/wp-content/uploads/2019/06/odna-zhenschina-plachet-drugaya-obnimaet.jpg", two = "https://memepedia.ru/wp-content/uploads/2019/06/ozadachennyy-kot-sidit-za-stolom-6.jpg", id = "1", active = true)))
     }
 
     fun showVoteDetails(event: VoteEvent){
