@@ -56,10 +56,18 @@ extension VotesCollectionController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let label = UILabel(frame: cell.bounds)
-        label.text = self.presenter.modelAtIndex(indexPath.item).name
-        cell.contentView.backgroundColor = .red
-        cell.contentView.addSubview(label)
+        if let cell = cell as? VotesCollectionCell {
+            self.presenter.imageForIndex(indexPath.item, position: .left, completion: { (data) in
+                DispatchQueue.main.async {
+                    cell.leftImageView.image = UIImage(data: data)
+                }
+            })
+            self.presenter.imageForIndex(indexPath.item, position: .right, completion: { (data) in
+                DispatchQueue.main.async {
+                    cell.rightImageView.image = UIImage(data: data)
+                }
+            })
+        }
     }
     
     

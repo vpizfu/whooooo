@@ -89,6 +89,6 @@ class CredentialInputViewController: BaseViewController {
     }
 }
 
-extension CredentialInputViewController: PhoneInputPresenterDelegate {
+extension CredentialInputViewController: SignUpPresenterDelegate {
     
 }

@@ -10,21 +10,21 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-protocol PhoneInputPresenterDelegate {
+protocol SignUpPresenterDelegate {
     
 }
 
-class PhoneInputPresenter: CredentialInputPresenter {
+class SignUpPresenter: CredentialInputPresenter {
         
     var confirmationCompletion: (() -> ())!
-    var delegate: PhoneInputPresenterDelegate?
-    var service: AuthenticationService
+    var delegate: SignUpPresenterDelegate?
+    let service: AuthenticationService
     
     init(service: AuthenticationService) {
         self.service = service
     }
     
-    func setupDelegate(delegate: PhoneInputPresenterDelegate) {
+    func setupDelegate(delegate: SignUpPresenterDelegate) {
         self.delegate = delegate
     }    
     

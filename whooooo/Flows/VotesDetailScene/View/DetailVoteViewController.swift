@@ -24,12 +24,16 @@ class DetailVoteViewController: BaseViewController {
     lazy var leftItemImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
     lazy var rightItemImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
@@ -38,5 +42,29 @@ class DetailVoteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.white
+        
+        view.addSubview(leftItemImageView)
+        view.addSubview(rightItemImageView)
+        
+        leftItemImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        leftItemImageView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        leftItemImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        leftItemImageView.trailingAnchor.constraint(equalTo: rightItemImageView.leadingAnchor).isActive = true
+        
+        rightItemImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        rightItemImageView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        rightItemImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        
+        self.presenter.imageForPosition(.left) { (image) in
+            DispatchQueue.main.async {
+                self.leftItemImageView.image = UIImage(data: image)
+            }
+        }
+        self.presenter.imageForPosition(.right) { (image) in
+            DispatchQueue.main.async {
+                self.rightItemImageView.image = UIImage(data: image)
+            }
+        }
     }
 }

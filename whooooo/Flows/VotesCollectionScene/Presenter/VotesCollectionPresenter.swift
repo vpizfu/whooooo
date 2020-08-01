@@ -15,19 +15,22 @@ protocol VotesCollectionPresenterDelegate {
 
 class VotesCollectionPresenter {
     
+    enum Position {
+        case left, right
+    }
+    
     var selectionCompletion: ((VoteObject) -> ())?
     var delegate: VotesCollectionPresenterDelegate?
     var data: [VoteObject] = []
+    let firebase: FirebaseAccess = FirebaseAccess()
     
     func setupDelegate(_ delegate: VotesCollectionPresenterDelegate) {
         self.delegate = delegate
     }
     
     func askData() {
-        let ref: DatabaseReference = Database.database().reference().child("votes")        
-        ref.observe(.value) { [weak self] (snapshot) in
-            let objects = (snapshot.value as! [String: [String: String]])
-            let result = objects.map {
+        firebase.getDataOnBranch(.votes) { [weak self] (data) in
+            let result = data.map {
                 try! JSONDecoder().decode(VoteObject.self, from: JSONSerialization.data(withJSONObject: $0.value, options: .sortedKeys))
             }
             self?.data.append(contentsOf: result)
@@ -45,6 +48,11 @@ class VotesCollectionPresenter {
     
     func didSelectItemAtIndex(_ index: Int) {
         self.selectionCompletion?(self.data[index])
+    }
+    
+    func imageForIndex(_ index: Int, position: Position, completion: @escaping (Data) -> ()) {
+        let url = position == .left ? self.data[index].firstItem : self.data[index].secondItem
+        ThumbStorage.shared.fetchAsyncOnURL(URL(string: url)!, completion: completion)
     }
     
 }

@@ -26,7 +26,7 @@ class AuthFlowCoordinator: Coordinator {
     }
     
     func start() {        
-        let presenter = PhoneInputPresenter(service: AuthenticationManager())
+        let presenter = SignUpPresenter(service: AuthenticationManager())
         let controller = CredentialInputViewController(presenter: presenter)
         
         presenter.confirmationCompletion = { [weak self] in
