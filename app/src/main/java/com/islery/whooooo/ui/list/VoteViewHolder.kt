@@ -17,12 +17,12 @@ class VoteViewHolder private constructor(
         binding.root.setOnClickListener { listener(vote) }
         binding.nameTxt.text = vote.name
         Glide.with(binding.imgOne)
-            .load(vote.one)
+            .load(vote.firstItem)
             .centerCrop()
             .into(binding.imgOne)
 
         Glide.with(binding.imgTwo)
-            .load(vote.two)
+            .load(vote.secondItem)
             .centerCrop()
             .into(binding.imgTwo)
     }
@@ -37,7 +37,7 @@ class VoteViewHolder private constructor(
 
 val VOTE_COMPATATOR = object : DiffUtil.ItemCallback<VoteEvent>(){
     override fun areItemsTheSame(oldItem: VoteEvent, newItem: VoteEvent): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.identifier == newItem.identifier
     }
 
     override fun areContentsTheSame(oldItem: VoteEvent, newItem: VoteEvent): Boolean {

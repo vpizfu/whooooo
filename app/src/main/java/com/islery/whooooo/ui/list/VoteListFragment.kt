@@ -12,16 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.islery.whooooo.R
 import com.islery.whooooo.data.model.VoteEvent
 import com.islery.whooooo.databinding.FragmentVoteListBinding
-import com.islery.whooooo.databinding.VoteRowBinding
 import kotlinx.android.synthetic.main.fragment_vote_list.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 const val VOTE_KEY = "vote_key"
 class VoteListFragment : MvpAppCompatFragment(), VoteListView {
-
-    private var _voteRowBinding: VoteRowBinding? = null
-    private val voteRowBinding get() = _voteRowBinding
 
     private var _binding: FragmentVoteListBinding? = null
     private val binding get() = _binding!!
@@ -63,8 +59,8 @@ class VoteListFragment : MvpAppCompatFragment(), VoteListView {
         Toast.makeText(requireContext(), "Next view ${vote.name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun showError() {
-        TODO("Not yet implemented")
+    override fun showError(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgress() {
