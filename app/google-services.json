@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "76068890020",
+    "firebase_url": "https://whooooo-88fc2.firebaseio.com",
+    "project_id": "whooooo-88fc2",
+    "storage_bucket": "whooooo-88fc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76068890020:android:85f1618f2ecec28fba4d31",
+        "android_client_info": {
+          "package_name": "com.islery.whooooo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76068890020-4t6ad1q8vukbdrpgkdmfoak5g58fkav1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtsUEwQVzqprlgxtzifEHkBxYnmVkZ6g8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76068890020-4t6ad1q8vukbdrpgkdmfoak5g58fkav1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "76068890020-utsm3icdgc7idao4ai0hoaugtb0nmld5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uvolchyk.whooooo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
