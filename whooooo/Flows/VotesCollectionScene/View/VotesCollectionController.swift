@@ -9,15 +9,18 @@
 import UIKit
 import Firebase
 
-class VotesCollectionController: BaseViewController, VotesCollectionPresenterDelegate {
-    
-    func presenterDidUpdateData() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
+class VotesCollectionController: BaseViewController {
 
     var presenter: VotesCollectionPresenter!
+    
+    init(presenter: VotesCollectionPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -39,6 +42,7 @@ class VotesCollectionController: BaseViewController, VotesCollectionPresenterDel
         self.presenter.delegate = self
         
     }
+    
 }
 
 extension VotesCollectionController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -60,12 +64,19 @@ extension VotesCollectionController: UICollectionViewDataSource, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 50)
+        return CGSize(width: collectionView.bounds.width, height: 130)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.presenter.didSelectItemAtIndex(indexPath.item)
     }
     
-    
+}
+
+extension VotesCollectionController: VotesCollectionPresenterDelegate {
+    func presenterDidUpdateData() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }

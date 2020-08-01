@@ -29,7 +29,7 @@ class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate {
         let controller = StartViewController()
         self.navigationController.pushViewController(controller, animated: true)
         controller.hideNavigationBar()
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
             if(AuthenticationManager().isUserAuthenticated()) {
                 self?.showContentFlow()
             } else {
@@ -39,28 +39,21 @@ class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate {
     }
     
     func showAuthorizationFlow() {
-        DispatchQueue.main.async {
-            self.navigationController.popViewController(animated: true)
-            let coordinator = AuthFlowCoordinator(navigationController: self.navigationController, delegate: self)
-            self.childCoordinators.append(coordinator)
-            coordinator.start()
-        }
+        let coordinator = AuthFlowCoordinator(navigationController: self.navigationController, delegate: self)
+        self.childCoordinators.append(coordinator)
+        coordinator.start()
     }
     
     func showContentFlow() {
-        DispatchQueue.main.async {
-            let controller = VotesCollectionController()
-            let presenter = VotesCollectionPresenter()
-            controller.presenter = presenter
-            self.navigationController.pushViewController(controller, animated: true)
-        }
+        let coordinator = ContentFlowCoordinator(navigationController: self.navigationController)
+        self.childCoordinators.append(coordinator)
+        coordinator.start()
     }
     
     // MARK: AuthFlowCoordinatorDelegate
     
     func userDidAuthenticate() {
         self.childCoordinators.removeLast()
-        self.navigationController.popViewController(animated: true)
         showContentFlow()
     }
 

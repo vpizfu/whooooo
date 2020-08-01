@@ -20,7 +20,6 @@ class StartViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
         activityIndicatorView.center = view.center
         view.addSubview(activityIndicatorView)

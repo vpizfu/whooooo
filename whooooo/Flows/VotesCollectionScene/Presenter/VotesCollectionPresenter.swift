@@ -10,31 +10,21 @@ import Foundation
 import Firebase
 
 protocol VotesCollectionPresenterDelegate {
-    
     func presenterDidUpdateData()
-    
 }
 
 class VotesCollectionPresenter {
     
     var selectionCompletion: ((VoteObject) -> ())?
-    
     var delegate: VotesCollectionPresenterDelegate?
-    
     var data: [VoteObject] = []
-    
-    init() {
-        
-    }
     
     func setupDelegate(_ delegate: VotesCollectionPresenterDelegate) {
         self.delegate = delegate
     }
     
     func askData() {
-
-        var ref: DatabaseReference = Database.database().reference().child("votes")
-        
+        let ref: DatabaseReference = Database.database().reference().child("votes")        
         ref.observe(.value) { [weak self] (snapshot) in
             let objects = (snapshot.value as! [String: [String: String]])
             let result = objects.map {

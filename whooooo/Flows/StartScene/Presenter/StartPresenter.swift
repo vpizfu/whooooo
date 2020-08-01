@@ -6,6 +6,8 @@
 //  Copyright © 2020 Uladzislau Volchyk. All rights reserved.
 //
 
+// MARK: no need mb
+
 import Foundation
 
 class StartPresenter {
@@ -15,7 +17,4 @@ class StartPresenter {
     init(service: AuthenticationService) {
         self.service = service
     }
-    
-    
-    
 }
