@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.islery.whooooo.databinding.FragmentVoteDetailBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -24,6 +27,12 @@ class VoteDetailFragment: MvpAppCompatFragment(), VoteDetailView {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val database = FirebaseDatabase.getInstance().reference
+
+    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
