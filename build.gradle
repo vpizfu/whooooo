@@ -6,6 +6,10 @@ buildscript {
         nav_version = "2.3.0"
         moxy_version = "2.1.2"
         material_version = '1.1.0'
+        fire_db_version = '19.3.1'
+        fire_analytics_version = '17.4.4'
+        fire_auth_version = '19.3.2'
+        multidex_version = "2.0.1"
     }
 
     repositories {
@@ -15,6 +19,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
