@@ -1,15 +1,15 @@
 package com.islery.whooooo.data.model
 
-data class voteObject(
-    val voteObjectId: String,
-    val one: List<one>,
-    val two: List<two>
+data class VotesCounter(
+    val voteObjectIdentifier: String,
+    val firstItem: List<firstItem>,
+    val secondItem: List<secondItem>
 )
 
-data class one(
+data class firstItem(
     val userId: String
 )
 
-data class two(
+data class secondItem(
     val userId: String
 )
