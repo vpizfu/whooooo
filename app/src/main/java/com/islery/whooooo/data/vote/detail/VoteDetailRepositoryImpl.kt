@@ -10,6 +10,6 @@ class VoteDetailRepositoryImpl: IVoteDetailRepository {
     }
 
     override fun voteForSecondItem(voteId: String) {
-        dbReference.child(voteId).child("firstItem").push().setValue("1")
+        dbReference.child(voteId).child("secondItem").push().setValue("1")
     }
 }
