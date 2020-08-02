@@ -1,6 +1,7 @@
 package com.islery.whooooo.data.model
 
 import android.os.Parcelable
+import android.service.carrier.CarrierIdentifier
 import android.text.BoringLayout
 import kotlinx.android.parcel.Parcelize
 
