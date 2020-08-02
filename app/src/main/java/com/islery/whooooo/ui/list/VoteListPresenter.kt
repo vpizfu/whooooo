@@ -1,18 +1,32 @@
 package com.islery.whooooo.ui.list
 
-import android.util.Log
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.islery.whooooo.data.list.IListRepository
+import com.islery.whooooo.data.list.ListRepositoryImpl
+import com.islery.whooooo.data.list.QueryResult
 import com.islery.whooooo.data.model.VoteEvent
 import moxy.MvpPresenter
 
 class VoteListPresenter : MvpPresenter<VoteListView>() {
 
+    private val repo: IListRepository = ListRepositoryImpl()
+
     fun getData(){
-        viewState.setData(listOf(VoteEvent(name = "Fake Event", firstItem = "https://memepedia.ru/wp-content/uploads/2019/06/odna-zhenschina-plachet-drugaya-obnimaet.jpg", secondItem = "https://memepedia.ru/wp-content/uploads/2019/06/ozadachennyy-kot-sidit-za-stolom-6.jpg", identifier = "1", active = true)))
+        viewState.showProgress()
+        repo.getActiveVotes { onVotesReceived(it) }
     }
 
     fun showVoteDetails(event: VoteEvent){
         viewState.showNextView(event)
+    }
+
+    private fun onVotesReceived(res: QueryResult<List<VoteEvent>, String?>){
+        viewState.hideProgress()
+        when(res){
+            is QueryResult.Success ->   viewState.setData(res.data)
+        is QueryResult.Error -> {
+            val message: String = res.msg ?: "Something went wrong"
+            viewState.showError(message)
+        }}
+
     }
 }

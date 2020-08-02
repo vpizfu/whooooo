@@ -37,7 +37,7 @@ class VoteViewHolder private constructor(
 
 val VOTE_COMPATATOR = object : DiffUtil.ItemCallback<VoteEvent>(){
     override fun areItemsTheSame(oldItem: VoteEvent, newItem: VoteEvent): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.identifier == newItem.identifier
     }
 
     override fun areContentsTheSame(oldItem: VoteEvent, newItem: VoteEvent): Boolean {

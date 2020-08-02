@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -14,8 +13,6 @@ import com.islery.whooooo.data.model.firstItem
 import com.islery.whooooo.data.model.secondItem
 import com.islery.whooooo.databinding.FragmentVoteDetailBinding
 import com.islery.whooooo.ui.list.VOTE_KEY
-import com.islery.whooooo.ui.list.VoteListFragment
-import kotlinx.android.synthetic.main.vote_row.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -36,7 +33,6 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
             val vote: VoteEvent? = arguments?.getParcelable<VoteEvent>(VOTE_KEY)
             imageUrlOne = vote?.firstItem
             imageUrlTwo = vote?.secondItem
-            voteId = vote?.identifier
         }
     }
 

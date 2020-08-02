@@ -7,11 +7,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class VoteEvent(
-    val dateFrom: Long = 0,
-    val dateTo: Long = 0,
     val identifier: String = "",
     val name: String = "",
     val firstItem: String = "",
     val secondItem: String = "",
-    val active: Boolean
+    val active: Boolean = false,
+    val dateFrom: Long = 0,
+    val dateTo: Long = 0
 ) : Parcelable
