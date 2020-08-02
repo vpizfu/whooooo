@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B3D953F24D589C0007AF597 /* ManageTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D953E24D589C0007AF597 /* ManageTabBarController.swift */; };
+		2B3D954924D5D472007AF597 /* ManageSplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D954824D5D472007AF597 /* ManageSplitController.swift */; };
+		2B3D954C24D5D4E6007AF597 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D954B24D5D4E6007AF597 /* MenuViewController.swift */; };
 		2BBA0C4224D4AA89006A5CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C4124D4AA89006A5CAE /* AppDelegate.swift */; };
 		2BBA0C4B24D4AA8B006A5CAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA0C4A24D4AA8B006A5CAE /* Assets.xcassets */; };
 		2BBA0C4E24D4AA8B006A5CAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA0C4C24D4AA8B006A5CAE /* LaunchScreen.storyboard */; };
@@ -53,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		2B3D953E24D589C0007AF597 /* ManageTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTabBarController.swift; sourceTree = "<group>"; };
+		2B3D954824D5D472007AF597 /* ManageSplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSplitController.swift; sourceTree = "<group>"; };
+		2B3D954B24D5D4E6007AF597 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2BBA0C3E24D4AA89006A5CAE /* whooooo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whooooo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBA0C4124D4AA89006A5CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BBA0C4A24D4AA8B006A5CAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,10 +121,19 @@
 		2B3D954024D589E4007AF597 /* ContentFlow */ = {
 			isa = PBXGroup;
 			children = (
+				2B3D954A24D5D4C7007AF597 /* MenuScene */,
 				2BBA0C6F24D4C4E5006A5CAE /* VotesCollectionScene */,
 				2BBA0C9D24D5156E006A5CAE /* VotesDetailScene */,
 			);
 			path = ContentFlow;
+			sourceTree = "<group>";
+		};
+		2B3D954A24D5D4C7007AF597 /* MenuScene */ = {
+			isa = PBXGroup;
+			children = (
+				2B3D954B24D5D4E6007AF597 /* MenuViewController.swift */,
+			);
+			path = MenuScene;
 			sourceTree = "<group>";
 		};
 		2BBA0C3524D4AA89006A5CAE = {
@@ -146,14 +159,14 @@
 		2BBA0C4024D4AA89006A5CAE /* whooooo */ = {
 			isa = PBXGroup;
 			children = (
-				2BBA0CBB24D57111006A5CAE /* CustomViews */,
-				2BBA0CA824D548A2006A5CAE /* Operations */,
+				2BBA0CBB24D57111006A5CAE /* CustomView */,
+				2BBA0CA824D548A2006A5CAE /* Operation */,
 				2BBA0CA424D51B4D006A5CAE /* Persistence */,
-				2BBA0C9824D4FEB5006A5CAE /* Models */,
+				2BBA0C9824D4FEB5006A5CAE /* Model */,
 				2BBA0C7B24D4C746006A5CAE /* Service */,
-				2BBA0C6924D4C1B9006A5CAE /* BaseControllers */,
-				2BBA0C6524D4BA57006A5CAE /* Coordinators */,
-				2BBA0C6624D4BA5E006A5CAE /* Flows */,
+				2BBA0C6924D4C1B9006A5CAE /* BaseController */,
+				2BBA0C6524D4BA57006A5CAE /* Coordinator */,
+				2BBA0C6624D4BA5E006A5CAE /* Flow */,
 				2BBA0C4124D4AA89006A5CAE /* AppDelegate.swift */,
 				2BBA0C4A24D4AA8B006A5CAE /* Assets.xcassets */,
 				2BBA0C4C24D4AA8B006A5CAE /* LaunchScreen.storyboard */,
@@ -172,33 +185,34 @@
 			path = whoooooTests;
 			sourceTree = "<group>";
 		};
-		2BBA0C6524D4BA57006A5CAE /* Coordinators */ = {
+		2BBA0C6524D4BA57006A5CAE /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				2BBA0C6724D4BB3C006A5CAE /* AppCoordinator.swift */,
 				2BBA0C6C24D4C212006A5CAE /* AuthFlowCoordinator.swift */,
 				2BBA0C9B24D513F8006A5CAE /* ContentFlowCoordinator.swift */,
 			);
-			path = Coordinators;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		2BBA0C6624D4BA5E006A5CAE /* Flows */ = {
+		2BBA0C6624D4BA5E006A5CAE /* Flow */ = {
 			isa = PBXGroup;
 			children = (
 				2B3D954024D589E4007AF597 /* ContentFlow */,
 				2BBA0C7F24D4C968006A5CAE /* AuthorizationFlow */,
 				2BBA0C7424D4C5D7006A5CAE /* StartScene */,
 			);
-			path = Flows;
+			path = Flow;
 			sourceTree = "<group>";
 		};
-		2BBA0C6924D4C1B9006A5CAE /* BaseControllers */ = {
+		2BBA0C6924D4C1B9006A5CAE /* BaseController */ = {
 			isa = PBXGroup;
 			children = (
 				2BBA0C6A24D4C1C8006A5CAE /* BaseViewController.swift */,
 				2B3D953E24D589C0007AF597 /* ManageTabBarController.swift */,
+				2B3D954824D5D472007AF597 /* ManageSplitController.swift */,
 			);
-			path = BaseControllers;
+			path = BaseController;
 			sourceTree = "<group>";
 		};
 		2BBA0C6F24D4C4E5006A5CAE /* VotesCollectionScene */ = {
@@ -312,12 +326,12 @@
 			path = DataService;
 			sourceTree = "<group>";
 		};
-		2BBA0C9824D4FEB5006A5CAE /* Models */ = {
+		2BBA0C9824D4FEB5006A5CAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				2BBA0C9924D4FEBE006A5CAE /* Models.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2BBA0C9D24D5156E006A5CAE /* VotesDetailScene */ = {
@@ -354,13 +368,13 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		2BBA0CA824D548A2006A5CAE /* Operations */ = {
+		2BBA0CA824D548A2006A5CAE /* Operation */ = {
 			isa = PBXGroup;
 			children = (
 				2BBA0CA924D548AA006A5CAE /* Base */,
 				2BBA0CAC24D54B04006A5CAE /* DataLoadOperation.swift */,
 			);
-			path = Operations;
+			path = Operation;
 			sourceTree = "<group>";
 		};
 		2BBA0CA924D548AA006A5CAE /* Base */ = {
@@ -412,12 +426,12 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		2BBA0CBB24D57111006A5CAE /* CustomViews */ = {
+		2BBA0CBB24D57111006A5CAE /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				2BBA0CBC24D57116006A5CAE /* Buttons */,
 			);
-			path = CustomViews;
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		2BBA0CBC24D57116006A5CAE /* Buttons */ = {
@@ -619,6 +633,7 @@
 				2B3D953F24D589C0007AF597 /* ManageTabBarController.swift in Sources */,
 				2BBA0CB124D55E9F006A5CAE /* FirebaseAccess.swift in Sources */,
 				2BBA0CA324D51625006A5CAE /* DetailVotePresenter.swift in Sources */,
+				2B3D954C24D5D4E6007AF597 /* MenuViewController.swift in Sources */,
 				2BBA0C9424D4F818006A5CAE /* VotesCollectionPresenter.swift in Sources */,
 				2BBA0C9C24D513F8006A5CAE /* ContentFlowCoordinator.swift in Sources */,
 				2BBA0CAB24D548C2006A5CAE /* AsyncOperation.swift in Sources */,
@@ -637,6 +652,7 @@
 				2BBA0CB324D56140006A5CAE /* SignInPresenter.swift in Sources */,
 				2BBA0C4224D4AA89006A5CAE /* AppDelegate.swift in Sources */,
 				2BBA0C7A24D4C6F7006A5CAE /* StartPresenter.swift in Sources */,
+				2B3D954924D5D472007AF597 /* ManageSplitController.swift in Sources */,
 				2BBA0C9224D4F794006A5CAE /* VotesCollectionCell.swift in Sources */,
 				2BBA0C6D24D4C212006A5CAE /* AuthFlowCoordinator.swift in Sources */,
 				2BBA0CAD24D54B04006A5CAE /* DataLoadOperation.swift in Sources */,

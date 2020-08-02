@@ -7,6 +7,7 @@ target 'whooooo' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'SideMenu'
   # Pods for whooooo
 
   target 'whoooooTests' do
