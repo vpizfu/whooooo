@@ -12,7 +12,7 @@ import FirebaseAuth
 protocol AuthenticationService {
     func isUserAuthenticated() -> Bool
     func signInCredentials(email: String, password: String, completion: @escaping (Error?) -> ())
-    func signUpCredentials(email: String, password: String, completion: @escaping (Error?) -> ())
+    func signUpCredentials(email: String, password: String, login: String, completion: @escaping (Error?) -> ())
     func currentUserIdentifier() -> String?
     func signOut()
 }
@@ -28,9 +28,21 @@ class AuthenticationManager: AuthenticationService {
         }
     }
     
-    func signUpCredentials(email: String, password: String, completion: @escaping (Error?) -> ()) {
+    func signUpCredentials(email: String, password: String, login: String, completion: @escaping (Error?) -> ()) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-            completion(error)
+            guard error == nil else {
+                completion(error)
+                return
+            }
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = login
+            changeRequest?.commitChanges { (error) in
+                guard error == nil else {
+                    completion(error)
+                    return
+                }
+            }
+            completion(nil)
         }
     }
     

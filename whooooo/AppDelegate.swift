@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-//        Auth.auth().updateCurrentUser(<#T##user: User##User#>, completion: <#T##UserUpdateCallback?##UserUpdateCallback?##(Error?) -> Void#>)
-//        try! Auth.auth().signOut()
+        try! Auth.auth().signOut()
         UserDefaults.standard.removeObject(forKey: "authVerificationID")
         let navigationController = UINavigationController()
         self.coordinator = AppCoordinator(navigationController: navigationController)

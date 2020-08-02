@@ -12,21 +12,26 @@ protocol InitialCredentialsPresenterDelegate {
     
 }
 
-class InitialCredentialsPresenter {
+class InitialCredentialsPresenter: CredentialInputPresenter {
     
-    var signInCompletion: (() -> ())?
-    var signUpCompletion: (() -> ())?
+    var confirmationCompletion: (() -> ())!
+    let service: AuthenticationService
     
-    var delegate: InitialCredentialsPresenterDelegate?
-    
-    @objc public  func signInTap() {
-        
-        signInCompletion?()
+    init(service: AuthenticationService) {
+        self.service = service
     }
     
-    @objc public  func signUpTap() {
-        signUpCompletion?()
+    func authorizeCredentials(email: String, password: String, login: String?) {
+        if let login = login {
+            service.signUpCredentials(email: email, password: password, login: login) { [weak self] (error) in
+                guard error == nil else { return }
+                self?.confirmationCompletion()
+                return
+            }
+        }
+        service.signInCredentials(email: email, password: password) { [weak self] (error) in
+            guard error == nil else { return }
+            self?.confirmationCompletion()
+        }
     }
-    
-    
 }
