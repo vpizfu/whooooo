@@ -23,17 +23,24 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Email"
+        return textField
+    }()
+    
     lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
         return textField
     }()
     
-    lazy var emailTextField: UITextField = {
+    lazy var passwordTextFieldRepeat: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Email"
+        textField.placeholder = "Repeat password"
         return textField
     }()
+    
     
     lazy var signInLabel: UILabel = {
         let label = UILabel()
@@ -58,6 +65,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
     lazy var signUpButton: UIButton = {
        let button = UIButton()
         button.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+        button.addTarget(self, action: #selector(switchBetweenAuthorisationMethods), for: .touchUpInside)
         return button
     }()
     
@@ -71,17 +79,18 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         super.viewDidLoad()
         presenter.delegate = self
         self.view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 250/255, alpha: 1.0)
+        passwordTextFieldRepeat.isHidden = true
         setupSignUpButton(button: signUpButton)
         setupForgotPasswordButton(button: forgotPasswordButton)
         setupEmailTextField(textField: emailTextField)
         setupPasswordTextField(textField: passwordTextField)
+        setupPasswordTextFieldRepeat(textField: passwordTextFieldRepeat)
         setupSignInLabel(label: signInLabel)
         setupSignInButton(button: signInButton)
         complexShape3()
         complexShape()
         layer = complexShape2()
        // view.addSubview(signInButton)
-
         //signInButton.addTarget(presenter, action: #selector(presenter.signInTap), for: .touchUpInside)
         
     }
@@ -100,6 +109,11 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
             passwordBottomLine.backgroundColor = UIColor.lightGray.cgColor
             passwordTextField.borderStyle = UITextField.BorderStyle.none
             passwordTextField.layer.addSublayer(passwordBottomLine)
+            let passwordRepeatBottomLine = CALayer()
+            passwordRepeatBottomLine.frame = CGRect(x: 0.0, y: 30, width: 300, height: 1.0)
+            passwordRepeatBottomLine.backgroundColor = UIColor.lightGray.cgColor
+            passwordTextFieldRepeat.borderStyle = UITextField.BorderStyle.none
+            passwordTextFieldRepeat.layer.addSublayer(passwordRepeatBottomLine)
     }
     
     func setupSignInLabel(label: UILabel) {
@@ -108,7 +122,10 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.leftAnchor.constraint(equalTo: passwordTextField.leftAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 80).isActive = true
+        label.topAnchor.constraint(equalTo: passwordTextFieldRepeat.bottomAnchor, constant: 55).isActive = true
+//        let labelTopAnchor = label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55)
+//        labelTopAnchor.priority = UILayoutPriority(rawValue: 250)
+//        labelTopAnchor.isActive = true
     }
     
     func setupForgotPasswordButton(button: UIButton) {
@@ -144,7 +161,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         textField.leftAnchor.constraint(equalTo: signUpButton.leftAnchor).isActive = true
         textField.rightAnchor.constraint(equalTo: forgotPasswordButton.rightAnchor).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 30).isActive = true
+        textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 15).isActive = true
     }
     
     func setupPasswordTextField(textField: UITextField) {
@@ -155,6 +172,15 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         textField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30).isActive = true
     }
+    
+    func setupPasswordTextFieldRepeat(textField: UITextField) {
+           self.view.addSubview(textField)
+           textField.translatesAutoresizingMaskIntoConstraints = false
+           textField.leftAnchor.constraint(equalTo: signUpButton.leftAnchor).isActive = true
+           textField.rightAnchor.constraint(equalTo: forgotPasswordButton.rightAnchor).isActive = true
+           textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+           textField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+       }
     
      func complexShape() {
             let path = UIBezierPath()
@@ -185,6 +211,18 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
             shapeLayer.addSublayer(label2)
         }
     
+    
+    @objc func switchBetweenAuthorisationMethods() {
+        if (passwordTextFieldRepeat.isHidden == true) {
+            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            signInLabel.text = "Sigh up"
+            passwordTextFieldRepeat.isHidden = false
+        } else {
+            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            signInLabel.text = "Sigh in"
+            passwordTextFieldRepeat.isHidden = true
+        }
+    }
     
         @objc func moveDown() {
     
