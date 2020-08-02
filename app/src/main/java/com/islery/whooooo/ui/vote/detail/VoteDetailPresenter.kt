@@ -26,4 +26,16 @@ class VoteDetailPresenter: MvpPresenter<VoteDetailView>() {
             .centerCrop()
             .into(imageView)
     }
+
+    fun setVoteName() {
+        viewState.setVoteName()
+    }
+
+    fun setBackgroundIfFirst() {
+        viewState.setBackgroundIfFirst()
+    }
+
+    fun setBackgroundIfSecond() {
+        viewState.setBackgroundIfSecond()
+    }
 }
