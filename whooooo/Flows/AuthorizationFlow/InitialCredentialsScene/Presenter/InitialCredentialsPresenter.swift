@@ -20,6 +20,7 @@ class InitialCredentialsPresenter {
     var delegate: InitialCredentialsPresenterDelegate?
     
     @objc public  func signInTap() {
+        
         signInCompletion?()
     }
     

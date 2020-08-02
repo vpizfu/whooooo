@@ -38,6 +38,7 @@
 		2BBA0CBA24D56EB3006A5CAE /* InitialCredentialsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CB924D56EB3006A5CAE /* InitialCredentialsPresenter.swift */; };
 		2BBA0CBE24D57131006A5CAE /* WButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CBD24D57131006A5CAE /* WButton.swift */; };
 		3C8C27701C04786F1D2A11DF /* Pods_whoooooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A74996E97CD637BE1F9DEC /* Pods_whoooooTests.framework */; };
+		ED85DEF824D69BEE006C6BF6 /* ffsagasfg.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85DEF724D69BEE006C6BF6 /* ffsagasfg.swift */; };
 		F2D5AB2F80D756622E31A13C /* Pods_whooooo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90B5D8DC61A9E63B06FEF75 /* Pods_whooooo.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		8DBD12CD53CF4F97ACB68C9E /* Pods-whoooooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whoooooTests.release.xcconfig"; path = "Target Support Files/Pods-whoooooTests/Pods-whoooooTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3A74996E97CD637BE1F9DEC /* Pods_whoooooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whoooooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74B7E1B478DFFCCB108CF73 /* Pods-whooooo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whooooo.debug.xcconfig"; path = "Target Support Files/Pods-whooooo/Pods-whooooo.debug.xcconfig"; sourceTree = "<group>"; };
+		ED85DEF724D69BEE006C6BF6 /* ffsagasfg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ffsagasfg.swift; sourceTree = "<group>"; };
 		F90B5D8DC61A9E63B06FEF75 /* Pods_whooooo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whooooo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 				2BBA0C4C24D4AA8B006A5CAE /* LaunchScreen.storyboard */,
 				2BBA0C6324D4AC97006A5CAE /* GoogleService-Info.plist */,
 				2BBA0C4F24D4AA8B006A5CAE /* Info.plist */,
+				ED85DEF724D69BEE006C6BF6 /* ffsagasfg.swift */,
 			);
 			path = whooooo;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				2BBA0CBA24D56EB3006A5CAE /* InitialCredentialsPresenter.swift in Sources */,
 				2BBA0C6B24D4C1C8006A5CAE /* BaseViewController.swift in Sources */,
 				2BBA0C7E24D4C757006A5CAE /* AuthenticationService.swift in Sources */,
+				ED85DEF824D69BEE006C6BF6 /* ffsagasfg.swift in Sources */,
 				2BBA0CA124D51619006A5CAE /* DetailVoteViewController.swift in Sources */,
 				2BBA0CB324D56140006A5CAE /* SignInPresenter.swift in Sources */,
 				2BBA0C4224D4AA89006A5CAE /* AppDelegate.swift in Sources */,
@@ -795,7 +799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7YP67DVLV3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = whooooo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
