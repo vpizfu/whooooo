@@ -13,6 +13,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
 
     let presenter: InitialCredentialsPresenter!
     var layer:CAShapeLayer? = nil
+    var layerWithTitle:CAShapeLayer? = nil
     
     init(presenter: InitialCredentialsPresenter) {
         self.presenter = presenter
@@ -79,7 +80,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         super.viewDidLoad()
         presenter.delegate = self
         self.view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 250/255, alpha: 1.0)
-        passwordTextFieldRepeat.isHidden = true
+        passwordTextFieldRepeat.alpha = 0.0
         setupSignUpButton(button: signUpButton)
         setupForgotPasswordButton(button: forgotPasswordButton)
         setupEmailTextField(textField: emailTextField)
@@ -90,6 +91,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         complexShape3()
         complexShape()
         layer = complexShape2()
+        layerWithTitle = complexShape()
        // view.addSubview(signInButton)
         //signInButton.addTarget(presenter, action: #selector(presenter.signInTap), for: .touchUpInside)
         
@@ -182,7 +184,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
            textField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
        }
     
-     func complexShape() {
+     func complexShape() -> CAShapeLayer {
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0.0, y: 240))
             path.addCurve(to: CGPoint(x: self.view.frame.size.width/2 - 50, y: 150),
@@ -209,18 +211,54 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
     
             shapeLayer.addSublayer(label)
             shapeLayer.addSublayer(label2)
+            return shapeLayer
         }
     
+    func changeLayerTitle(layer: CATextLayer, text:String) {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.moveIn
+        layer.add(transition, forKey: "transition")
+        layer.string = text
+    }
     
     @objc func switchBetweenAuthorisationMethods() {
-        if (passwordTextFieldRepeat.isHidden == true) {
-            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
-            signInLabel.text = "Sigh up"
-            passwordTextFieldRepeat.isHidden = false
+        
+        let layerOne:CATextLayer = (layerWithTitle?.sublayers![0])! as! CATextLayer
+        let layerTwo:CATextLayer = (layerWithTitle?.sublayers![1])! as! CATextLayer
+        
+        if (self.passwordTextFieldRepeat.alpha == 0.0) {
+//            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+//            signInLabel.text = "Sigh up"
+            
+            changeLayerTitle(layer: layerOne, text: "Join us")
+            changeLayerTitle(layer: layerTwo, text: "")
+            
+            UIView.transition(with: signUpButton, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            })
+            UIView.transition(with: signInLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.signInLabel.text = "Sigh up"
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.passwordTextFieldRepeat.alpha = 1.0
+            })
         } else {
-            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
-            signInLabel.text = "Sigh in"
-            passwordTextFieldRepeat.isHidden = true
+            
+            changeLayerTitle(layer: layerOne, text: "Welcome")
+            changeLayerTitle(layer: layerTwo, text: "Back")
+            
+//            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+//            signInLabel.text = "Sigh in"
+            UIView.transition(with: signUpButton, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            })
+            UIView.transition(with: signInLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.signInLabel.text = "Sigh in"
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.passwordTextFieldRepeat.alpha = 0.0
+            })
         }
     }
     
