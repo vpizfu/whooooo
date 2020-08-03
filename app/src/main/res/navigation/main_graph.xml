@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.islery.whooooo.ui.login.LoginFragment"
-        android:label="fragment_login"
+        android:label=""
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -42,12 +42,12 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.islery.whooooo.ui.register.RegisterFragment"
-        android:label="fragment_register"
+        android:label=""
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/resetPassFragment"
         android:name="com.islery.whooooo.ui.resetpass.ResetPassFragment"
-        android:label="fragment_reset_pass"
+        android:label=""
         tools:layout="@layout/fragment_reset_pass" />
     <action
         android:id="@+id/action_global_voteListFragment"
