@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.islery.whooooo.R
 import com.islery.whooooo.databinding.FragmentRegisterBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -38,7 +39,7 @@ class RegisterFragment : MvpAppCompatFragment(), ReqisterView {
     }
 
     override fun onRegisterSuccess() {
-        Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_global_voteListFragment)
     }
 
     override fun onRegisterError(error: String) {
