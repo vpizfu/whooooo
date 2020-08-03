@@ -9,15 +9,18 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_top"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="@dimen/xlarge_dimens"
+        android:layout_marginTop="@dimen/large_dimen"
+        android:layout_marginEnd="@dimen/xlarge_dimens"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_first"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toTopOf="@id/guideline_top_first">
+        app:layout_constraintBottom_toTopOf="@+id/vote_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/image_one"
@@ -29,14 +32,14 @@
 
     <TextView
         android:id="@+id/vote_name"
+        style="@style/VoteName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Android VS iOS"
-        style="@style/VoteName"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_top" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Android VS iOS" />
 
     <TextView
         android:id="@+id/total_count_text"
@@ -47,7 +50,6 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4"/>
 
     <TextView
@@ -63,15 +65,18 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_bottom"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="@dimen/xlarge_dimens"
+        android:layout_marginEnd="@dimen/xlarge_dimens"
+        android:layout_marginBottom="@dimen/base_dimen"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_second"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toTopOf="@id/guideline_top_second">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vote_name">
 
         <ImageView
             android:id="@+id/image_two"
@@ -80,48 +85,6 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="110dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="110dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="100dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="431dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="100dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="300dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
