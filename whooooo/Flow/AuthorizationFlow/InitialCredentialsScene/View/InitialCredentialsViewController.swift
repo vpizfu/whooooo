@@ -24,7 +24,6 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         case signIn, signUp
     }
     
-    
     let presenter: CredentialInputPresenter!
     var currentState: AuthState = .signIn
     var layer:CAShapeLayer? = nil
@@ -308,21 +307,29 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
     }
     
     @objc func authorizationTap() {
+        
         if let email = emailTextField.text, let password = passwordTextField.text {
-            if currentState == .signUp {
-                let login = loginTextField.text
+            if currentState == .signUp, let login = loginTextField.text {
                 presenter.authorizeCredentials(email: email, password: password, login: login) { (error) in
+                    if (error == nil) {
+                        self.moveDown()
+                    } else {
                     let alert = UIAlertController(title: "Registration failed", message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
+                    }
                 }
                 return
             }
                    
                 presenter.authorizeCredentials(email: email, password: password, login: nil) { (error) in
+                    if (error == nil) {
+                        self.moveDown()
+                    } else {
                     let alert = UIAlertController(title: "Authorisation failed", message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
+                    }
             }
         }
     }
@@ -342,13 +349,13 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
             let animateOutlineFromBottom = CABasicAnimation(keyPath: "position")
             animateOutlineFromBottom.fromValue = NSValue(cgPoint: CGPoint(x:0, y:0))
             animateOutlineFromBottom.toValue = NSValue(cgPoint: CGPoint(x:0,y:self.view.frame.height))
-            animateOutlineFromBottom.duration =  0.5
+            animateOutlineFromBottom.duration =  0.2
             animateOutlineFromBottom.fillMode = CAMediaTimingFillMode.forwards
             shapLayer.add(animateOutlineFromBottom, forKey:"position")
             
             let moveDown = CABasicAnimation(keyPath: "position.y")
             moveDown.byValue = self.view.frame.height
-            moveDown.duration   = 0.5;
+            moveDown.duration   = 0.2;
             moveDown.isRemovedOnCompletion = false;
             moveDown.fillMode   = CAMediaTimingFillMode.forwards;
             //        CATransaction.setCompletionBlock {

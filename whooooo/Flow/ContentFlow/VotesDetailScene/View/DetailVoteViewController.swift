@@ -328,8 +328,20 @@ class DetailVoteViewController: BaseViewController, DetailVotePresenterDelegate 
         
         statusLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         statusLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        statusLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
         statusLabel.topAnchor.constraint(equalTo: self.timeLabel.bottomAnchor, constant: 5).isActive = true
+        
+        self.presenter.dateForLiveLabel { (timestamp) in
+            let timestampCurrent = Int(NSDate().timeIntervalSince1970)
+            if (timestampCurrent >= timestamp) {
+                self.statusLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+                self.statusLabel.backgroundColor = UIColor.black
+                self.statusLabel.text = "Ended"
+                self.leftItemButton.isEnabled = false
+                self.rightItemButton.isEnabled = false
+            } else {
+                self.statusLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
+            }
+        }
         
         self.containerView.addSubview(separatorView3)
         

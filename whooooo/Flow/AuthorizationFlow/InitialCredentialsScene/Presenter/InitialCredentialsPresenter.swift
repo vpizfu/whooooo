@@ -30,6 +30,7 @@ class InitialCredentialsPresenter: CredentialInputPresenter {
         if let login = login {
             service.signUpCredentials(email: email, password: password, login: login) { [weak self] (error) in
                 guard error == nil else { completion(error); return }
+                completion(nil);
                 self?.confirmationCompletion()
                 return
             }
@@ -38,6 +39,7 @@ class InitialCredentialsPresenter: CredentialInputPresenter {
         
         service.signInCredentials(email: email, password: password) { [weak self] (error) in
             guard error == nil else { completion(error); return }
+            completion(nil);
             self?.confirmationCompletion()
         }
     }

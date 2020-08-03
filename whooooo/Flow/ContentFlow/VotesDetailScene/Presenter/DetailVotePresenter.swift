@@ -59,6 +59,10 @@ class DetailVotePresenter {
         completion(self.vote.firstVoteName)
     }
     
+    func dateForLiveLabel( completion: @escaping (Int) -> ()) {
+        completion(self.vote.dateTo)
+    }
+    
     func hoursToEnd( completion: @escaping (String) -> ()) {
            let date = Date(timeIntervalSince1970: TimeInterval(self.vote.dateTo))
            let dateFormatter = DateFormatter()
