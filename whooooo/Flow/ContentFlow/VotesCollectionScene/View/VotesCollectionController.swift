@@ -37,6 +37,7 @@ class VotesCollectionController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Votes"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Quit", style: .plain, target: presenter, action: #selector(presenter.logoutAction))
         collectionView.register(VotesCollectionCell.self, forCellWithReuseIdentifier: VotesCollectionCell.reuseIdentifier)
         collectionView.backgroundColor = .white
         self.presenter.askData()

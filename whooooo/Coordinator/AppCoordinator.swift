@@ -16,7 +16,7 @@ protocol Coordinator {
     func start()
 }
 
-class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate {
+class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate, ContentFlowCoordinatorDelegate {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -45,7 +45,7 @@ class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate {
     }
     
     func showContentFlow() {
-        let coordinator = ContentFlowCoordinator(navigationController: self.navigationController)
+        let coordinator = ContentFlowCoordinator(navigationController: self.navigationController, delegate: self)
         self.childCoordinators.append(coordinator)
         coordinator.start()
     }
@@ -55,6 +55,13 @@ class AppCoordinator: Coordinator, AuthFlowCoordinatorDelegate {
     func userDidAuthenticate() {
         self.childCoordinators.removeLast()
         showContentFlow()
+    }
+    
+    // MARK: ContentFlowCoordinatorDelegate
+    
+    func userDidLogout() {
+        self.childCoordinators.removeLast()
+        showAuthorizationFlow()
     }
 
 }

@@ -34,6 +34,7 @@ class AuthFlowCoordinator: Coordinator {
         }
         
         self.navigationController.setViewControllers([controller], animated: true)
+        controller.hideNavigationBar()
     }
     
     
