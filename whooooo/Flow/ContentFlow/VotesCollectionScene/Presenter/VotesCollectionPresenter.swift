@@ -19,6 +19,8 @@ class VotesCollectionPresenter {
         case left, right
     }
     
+    
+    var logoutCompletion: (() -> ())?
     var selectionCompletion: ((VoteObject) -> ())?
     var delegate: VotesCollectionPresenterDelegate?
     var data: [VoteObject] = []
@@ -70,6 +72,11 @@ class VotesCollectionPresenter {
     
     func categoryNameForIndex(_ index: Int, completion: @escaping (String) -> ()) {
            completion(self.data[index].category)
+    }
+    
+    @objc func logoutAction() {
+        AuthenticationManager().signOut()
+        self.logoutCompletion?()
     }
     
 }

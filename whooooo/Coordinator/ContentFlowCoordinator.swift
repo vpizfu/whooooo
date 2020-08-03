@@ -10,13 +10,19 @@ import Foundation
 import UIKit
 import SideMenu
 
+protocol ContentFlowCoordinatorDelegate {
+    func userDidLogout()
+}
+
 class ContentFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
+    var delegate: ContentFlowCoordinatorDelegate?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, delegate: ContentFlowCoordinatorDelegate) {
         self.navigationController = navigationController
         self.childCoordinators = []
+        self.delegate = delegate
     }
     
     func start() {
@@ -25,21 +31,17 @@ class ContentFlowCoordinator: Coordinator {
         let presenter = VotesCollectionPresenter()
         
         let contentController = VotesCollectionController(presenter: presenter)
-        let contentNav = UINavigationController(rootViewController:contentController)
         
         let menuController = MenuViewController()
-        let menuNav = SideMenuNavigationController(rootViewController: menuController)
+        
         
         presenter.selectionCompletion = { [weak self] vote in
             self?.showDetailSceneForVote(vote)
         }
         
-        SideMenuManager.default.leftMenuNavigationController = menuNav
-        SideMenuManager.default.addPanGestureToPresent(toView: menuNav.navigationBar)
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: contentController.view)
-//        container.viewControllers = [menuNav, contentNav]
-//
-//        container.modalPresentationStyle = .fullScreen
+        presenter.logoutCompletion = { [weak self] in
+            self?.delegate?.userDidLogout()
+        }
         
         self.navigationController.setViewControllers([contentController], animated: true)
         contentController.showNavigationBar()
