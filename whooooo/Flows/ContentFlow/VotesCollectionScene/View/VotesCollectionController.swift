@@ -36,6 +36,7 @@ class VotesCollectionController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Votes"
         collectionView.register(VotesCollectionCell.self, forCellWithReuseIdentifier: VotesCollectionCell.reuseIdentifier)
         collectionView.backgroundColor = .white
         self.presenter.askData()
@@ -67,12 +68,25 @@ extension VotesCollectionController: UICollectionViewDataSource, UICollectionVie
                     cell.rightImageView.image = UIImage(data: data)
                 }
             })
+            self.presenter.nameForIndex(indexPath.row) { (name) in
+                cell.mainLabel.text = name
+            }
+            
+            self.presenter.timeToEndForIndex(indexPath.row) { (date) in
+                cell.timeLabel.text = date
+            }
+            
+            self.presenter.categoryNameForIndex(indexPath.row) { (category) in
+                cell.categoryLabel.text = "\(category) category"
+                cell.categoryImageView.image = UIImage(named: category)
+            }
+            
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 130)
+        return CGSize(width: collectionView.bounds.width, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

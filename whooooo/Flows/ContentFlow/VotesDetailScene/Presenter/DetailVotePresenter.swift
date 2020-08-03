@@ -30,4 +30,32 @@ class DetailVotePresenter {
         ThumbStorage.shared.fetchAsyncOnURL(URL(string: url)!, completion: completion)
     }
     
+    func categoryName( completion: @escaping (String) -> ()) {
+           completion(self.vote.category)
+    }
+    
+    func leftItemName( completion: @escaping (String) -> ()) {
+           completion(self.vote.secondVoteName)
+    }
+    
+    func rightItemName( completion: @escaping (String) -> ()) {
+        completion(self.vote.firstVoteName)
+    }
+    
+    func hoursToEnd( completion: @escaping (String) -> ()) {
+           let date = Date(timeIntervalSince1970: TimeInterval(self.vote.dateTo))
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "hh:mm"
+           print(dateFormatter.string(from: date))
+           completion(dateFormatter.string(from: date))
+       }
+    
+    func dateToEnd( completion: @escaping (String) -> ()) {
+        let date = Date(timeIntervalSince1970: TimeInterval(self.vote.dateTo))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM"
+        print(dateFormatter.string(from: date))
+        completion(dateFormatter.string(from: date))
+    }
+    
 }

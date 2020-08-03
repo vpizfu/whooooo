@@ -20,8 +20,6 @@
 		2BBA0C7724D4C5E7006A5CAE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C7624D4C5E7006A5CAE /* StartViewController.swift */; };
 		2BBA0C7A24D4C6F7006A5CAE /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C7924D4C6F7006A5CAE /* StartPresenter.swift */; };
 		2BBA0C7E24D4C757006A5CAE /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C7D24D4C757006A5CAE /* AuthenticationService.swift */; };
-		2BBA0C8624D4C9C3006A5CAE /* CredentialInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C8524D4C9C3006A5CAE /* CredentialInputViewController.swift */; };
-		2BBA0C8824D4C9D2006A5CAE /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C8724D4C9D2006A5CAE /* SignUpPresenter.swift */; };
 		2BBA0C9224D4F794006A5CAE /* VotesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9124D4F794006A5CAE /* VotesCollectionCell.swift */; };
 		2BBA0C9424D4F818006A5CAE /* VotesCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9324D4F818006A5CAE /* VotesCollectionPresenter.swift */; };
 		2BBA0C9724D4F870006A5CAE /* VotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9624D4F870006A5CAE /* VotesService.swift */; };
@@ -33,7 +31,6 @@
 		2BBA0CAB24D548C2006A5CAE /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CAA24D548C2006A5CAE /* AsyncOperation.swift */; };
 		2BBA0CAD24D54B04006A5CAE /* DataLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CAC24D54B04006A5CAE /* DataLoadOperation.swift */; };
 		2BBA0CB124D55E9F006A5CAE /* FirebaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CB024D55E9F006A5CAE /* FirebaseAccess.swift */; };
-		2BBA0CB324D56140006A5CAE /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CB224D56140006A5CAE /* SignInPresenter.swift */; };
 		2BBA0CB824D56E9D006A5CAE /* InitialCredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CB724D56E9D006A5CAE /* InitialCredentialsViewController.swift */; };
 		2BBA0CBA24D56EB3006A5CAE /* InitialCredentialsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CB924D56EB3006A5CAE /* InitialCredentialsPresenter.swift */; };
 		2BBA0CBE24D57131006A5CAE /* WButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CBD24D57131006A5CAE /* WButton.swift */; };
@@ -70,8 +67,6 @@
 		2BBA0C7624D4C5E7006A5CAE /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		2BBA0C7924D4C6F7006A5CAE /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
 		2BBA0C7D24D4C757006A5CAE /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		2BBA0C8524D4C9C3006A5CAE /* CredentialInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialInputViewController.swift; sourceTree = "<group>"; };
-		2BBA0C8724D4C9D2006A5CAE /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		2BBA0C9124D4F794006A5CAE /* VotesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesCollectionCell.swift; sourceTree = "<group>"; };
 		2BBA0C9324D4F818006A5CAE /* VotesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesCollectionPresenter.swift; sourceTree = "<group>"; };
 		2BBA0C9624D4F870006A5CAE /* VotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesService.swift; sourceTree = "<group>"; };
@@ -83,7 +78,6 @@
 		2BBA0CAA24D548C2006A5CAE /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		2BBA0CAC24D54B04006A5CAE /* DataLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadOperation.swift; sourceTree = "<group>"; };
 		2BBA0CB024D55E9F006A5CAE /* FirebaseAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAccess.swift; sourceTree = "<group>"; };
-		2BBA0CB224D56140006A5CAE /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		2BBA0CB724D56E9D006A5CAE /* InitialCredentialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCredentialsViewController.swift; sourceTree = "<group>"; };
 		2BBA0CB924D56EB3006A5CAE /* InitialCredentialsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCredentialsPresenter.swift; sourceTree = "<group>"; };
 		2BBA0CBD24D57131006A5CAE /* WButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WButton.swift; sourceTree = "<group>"; };
@@ -276,35 +270,8 @@
 			isa = PBXGroup;
 			children = (
 				2BBA0CB424D56E44006A5CAE /* InitialCredentialsScene */,
-				2BBA0C8224D4C9A2006A5CAE /* CredentialsInputScene */,
 			);
 			path = AuthorizationFlow;
-			sourceTree = "<group>";
-		};
-		2BBA0C8224D4C9A2006A5CAE /* CredentialsInputScene */ = {
-			isa = PBXGroup;
-			children = (
-				2BBA0C8424D4C9B2006A5CAE /* Presenter */,
-				2BBA0C8324D4C9AD006A5CAE /* View */,
-			);
-			path = CredentialsInputScene;
-			sourceTree = "<group>";
-		};
-		2BBA0C8324D4C9AD006A5CAE /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2BBA0C8524D4C9C3006A5CAE /* CredentialInputViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2BBA0C8424D4C9B2006A5CAE /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				2BBA0C8724D4C9D2006A5CAE /* SignUpPresenter.swift */,
-				2BBA0CB224D56140006A5CAE /* SignInPresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2BBA0C9524D4F85C006A5CAE /* DataService */ = {
@@ -631,14 +598,11 @@
 				2BBA0C6824D4BB3C006A5CAE /* AppCoordinator.swift in Sources */,
 				2BBA0C7724D4C5E7006A5CAE /* StartViewController.swift in Sources */,
 				2BBA0CA624D51B5D006A5CAE /* ThumbStorage.swift in Sources */,
-				2BBA0C8824D4C9D2006A5CAE /* SignUpPresenter.swift in Sources */,
-				2BBA0C8624D4C9C3006A5CAE /* CredentialInputViewController.swift in Sources */,
 				2BBA0CBA24D56EB3006A5CAE /* InitialCredentialsPresenter.swift in Sources */,
 				2BBA0C6B24D4C1C8006A5CAE /* BaseViewController.swift in Sources */,
 				2BBA0C7E24D4C757006A5CAE /* AuthenticationService.swift in Sources */,
 				ED85DEF824D69BEE006C6BF6 /* ffsagasfg.swift in Sources */,
 				2BBA0CA124D51619006A5CAE /* DetailVoteViewController.swift in Sources */,
-				2BBA0CB324D56140006A5CAE /* SignInPresenter.swift in Sources */,
 				2BBA0C4224D4AA89006A5CAE /* AppDelegate.swift in Sources */,
 				2BBA0C7A24D4C6F7006A5CAE /* StartPresenter.swift in Sources */,
 				2BBA0C9224D4F794006A5CAE /* VotesCollectionCell.swift in Sources */,

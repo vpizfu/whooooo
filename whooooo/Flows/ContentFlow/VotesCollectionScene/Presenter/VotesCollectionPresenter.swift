@@ -55,4 +55,21 @@ class VotesCollectionPresenter {
         ThumbStorage.shared.fetchAsyncOnURL(URL(string: url)!, completion: completion)
     }
     
+    func nameForIndex(_ index: Int, completion: @escaping (String) -> ()) {
+           let name = self.data[index].name
+           completion(name)
+    }
+    
+    func timeToEndForIndex(_ index: Int, completion: @escaping (String) -> ()) {
+        let date = Date(timeIntervalSince1970: TimeInterval(self.data[index].dateTo))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, hh:mm"
+        print(dateFormatter.string(from: date))
+        completion(dateFormatter.string(from: date))
+    }
+    
+    func categoryNameForIndex(_ index: Int, completion: @escaping (String) -> ()) {
+           completion(self.data[index].category)
+    }
+    
 }

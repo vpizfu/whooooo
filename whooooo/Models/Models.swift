@@ -13,6 +13,11 @@ struct VoteObject: Codable {
     let identifier: String
     let firstItem: String
     let secondItem: String
+    let dateFrom: Int
+    let dateTo: Int
+    let category: String
+    let firstVoteName: String
+    let secondVoteName: String
     let active: Bool
     
 //    enum CodingKeys: String, CodingKey {
