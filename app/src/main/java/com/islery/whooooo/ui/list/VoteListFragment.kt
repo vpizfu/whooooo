@@ -27,6 +27,7 @@ class VoteListFragment : MvpAppCompatFragment(), VoteListView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         presenter.getData()
     }
 
@@ -56,7 +57,6 @@ class VoteListFragment : MvpAppCompatFragment(), VoteListView {
     override fun showNextView(vote: VoteEvent) {
         val bundle = bundleOf(VOTE_KEY to vote)
         findNavController().navigate(R.id.action_voteListFragment_to_voteDetailFragment, bundle)
-        Toast.makeText(requireContext(), "Next view ${vote.name}", Toast.LENGTH_SHORT).show()
     }
 
     override fun showError(msg: String) {

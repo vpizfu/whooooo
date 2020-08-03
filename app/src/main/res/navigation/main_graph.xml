@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/voteListFragment"
         android:name="com.islery.whooooo.ui.list.VoteListFragment"
-        android:label="fragment_vote_list"
+        android:label="Votes"
         tools:layout="@layout/fragment_vote_list" >
         <action
             android:id="@+id/action_voteListFragment_to_voteDetailFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/voteDetailFragment"
         android:name="com.islery.whooooo.ui.vote.detail.VoteDetailFragment"
-        android:label="VoteDetailFragment" >
+        android:label="Vote" >
         <action android:id="@+id/action_voteDetailFragment_pop" />
         <action
             android:id="@+id/action_voteDetailFragment_to_voteListFragment"
@@ -54,4 +54,9 @@
         app:destination="@id/voteListFragment"
         app:popUpTo="@id/main_graph"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.islery.whooooo.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" /><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
 </navigation>

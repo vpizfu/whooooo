@@ -11,7 +11,10 @@ data class VoteEvent(
     val name: String = "",
     val firstItem: String = "",
     val secondItem: String = "",
+    val firstVoteName: String = "",
+    val secondVoteName: String = "",
     val active: Boolean = false,
     val dateFrom: Long = 0,
-    val dateTo: Long = 0
+    val dateTo: Long = 0,
+    val category: String = ""
 ) : Parcelable

@@ -2,7 +2,6 @@ package com.islery.whooooo.ui
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -35,8 +34,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun setPrimaryDestination(){
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+    private fun setPrimaryDestination() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val graphInflater = navHostFragment.findNavController().navInflater
         val navGraph = graphInflater.inflate(R.navigation.main_graph)
         val user = FirebaseAuth.getInstance().currentUser
@@ -52,10 +52,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-      when(item.itemId){
-          R.id.item_list ->navController.navigate(R.id.action_global_voteListFragment)
-          R.id.item_profile -> Toast.makeText(baseContext, "Not yet implemented", Toast.LENGTH_SHORT).show()
-      }
+        when (item.itemId) {
+            R.id.item_list -> navController.navigate(R.id.action_global_voteListFragment)
+            R.id.item_profile -> navController.navigate(R.id.action_global_profileFragment)
+        }
         return true
     }
 }
