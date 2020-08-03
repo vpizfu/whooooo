@@ -1,16 +1,19 @@
 package com.islery.whooooo.ui.vote.detail
 
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.islery.whooooo.data.model.VoteEvent
-import com.islery.whooooo.data.model.VotesCounter
-import com.islery.whooooo.data.model.firstItem
-import com.islery.whooooo.data.model.secondItem
+import com.islery.whooooo.R
+import com.islery.whooooo.data.model.*
 import com.islery.whooooo.databinding.FragmentVoteDetailBinding
 import com.islery.whooooo.ui.list.VOTE_KEY
 import moxy.MvpAppCompatFragment
@@ -24,6 +27,7 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
     private var imageUrlOne: String? = null
     private var imageUrlTwo: String? = null
     private var voteId: String? = null
+    private var voteName: String? = null
 
     private val presenter by moxyPresenter { VoteDetailPresenter() }
 
@@ -33,6 +37,8 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
             val vote: VoteEvent? = arguments?.getParcelable<VoteEvent>(VOTE_KEY)
             imageUrlOne = vote?.firstItem
             imageUrlTwo = vote?.secondItem
+            voteId = vote?.identifier
+            voteName = vote?.name
         }
     }
 
@@ -49,35 +55,43 @@ class VoteDetailFragment : MvpAppCompatFragment(), VoteDetailView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(binding.imageOne)
-            .load(imageUrlOne)
-            .centerCrop()
-            .into(binding.imageOne)
+        setVoteName()
+        imageUrlOne?.let { presenter.showImage(binding.imageOne, it) }
+        imageUrlTwo?.let { presenter.showImage(binding.imageTwo, it) }
 
-        Glide.with(binding.imageTwo)
-            .load(imageUrlTwo)
-            .centerCrop()
-            .into(binding.imageTwo)
+        binding.imageOne.setOnClickListener {
+            setBackgroundIfFirst()
+            voteId?.let { voteId -> presenter.voteForFirstItem(voteId) }
+        }
+
         binding.imageTwo.setOnClickListener {
-            val database = Firebase.database.reference
-            val firstItem = firstItem("2")
-            val secondItem = secondItem("3")
-            val voteCount = VotesCounter(
-                voteObjectIdentifier = "id",
-                firstItem = listOf(firstItem),
-                secondItem = listOf(secondItem)
-            )
-            voteId?.let { it1 ->
-                database.child("votesCounterTest").child("voteObjectIdentifier").child(
-                    it1
-                ).setValue(voteCount)
-            }
+            setBackgroundIfSecond()
+            voteId?.let { voteId -> presenter.voteForSecondItem(voteId) }
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun setVoteName() {
+        binding.voteName.text = voteName
+    }
+
+    override fun setBackgroundIfFirst() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.root.background =
+                resources.getDrawable(R.drawable.background_gradient_top, null)
+        }
+    }
+
+    override fun setBackgroundIfSecond() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.root.background =
+                resources.getDrawable(R.drawable.background_gradient_bottom, null)
+        }
     }
 
 

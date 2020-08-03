@@ -1,7 +1,6 @@
 package com.islery.whooooo.data.list
 
 import com.islery.whooooo.data.model.VoteEvent
-import com.islery.whooooo.data.register.AuthResult
 
 interface IListRepository {
     fun getActiveVotes(onQueryResult: (res: QueryResult<List<VoteEvent>, String?>) -> Unit)

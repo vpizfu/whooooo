@@ -22,4 +22,14 @@
 
     </style>
 
+    <style name="VoteName">
+        <item name="android:textSize">30sp</item>
+        <item name="singleLine">true</item>
+    </style>
+
+    <style name="SmallText">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
 </resources>
