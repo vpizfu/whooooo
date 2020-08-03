@@ -334,8 +334,16 @@ class DetailVoteViewController: BaseViewController, DetailVotePresenterDelegate 
             let timestampCurrent = Int(NSDate().timeIntervalSince1970)
             if (timestampCurrent >= timestamp) {
                 self.statusLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-                self.statusLabel.backgroundColor = UIColor.black
-                self.statusLabel.text = "Ended"
+                self.presenter.isEnded { [weak self] isEnded in
+                    if isEnded {
+                        self?.statusLabel.backgroundColor = UIColor.black
+                        self?.statusLabel.text = "Ended"
+                    } else {
+                        self?.statusLabel.backgroundColor = UIColor.red
+                        self?.statusLabel.text = "LIVE"
+                    }
+                }
+                
                 self.leftItemButton.isEnabled = false
                 self.rightItemButton.isEnabled = false
             } else {
@@ -390,6 +398,19 @@ class DetailVoteViewController: BaseViewController, DetailVotePresenterDelegate 
         
         presenter.totalVotesCount { [weak self] amount in
             self?.numberOfVotesLabel.text = "Total votes: \(amount)"
+        }
+        
+        presenter.winner { [weak self] position in
+            switch position {
+            case .left:
+                self?.firstItemNameLabel.textColor = .green
+                self?.secondItemNameLabel.textColor = .red
+            case .right:
+                self?.firstItemNameLabel.textColor = .red
+                self?.secondItemNameLabel.textColor = .green
+            default:
+                return
+            }
         }
         
                 

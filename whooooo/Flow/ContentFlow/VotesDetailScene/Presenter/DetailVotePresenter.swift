@@ -147,8 +147,31 @@ class DetailVotePresenter {
             let rightBranch = snapshot.childSnapshot(forPath: "secondItem").childrenCount
             completion("\(leftBranch + rightBranch)")
         }
-        
-        
     }
     
+    func isEnded(_ completion: @escaping (Bool) -> ()) {
+        let date = Date(timeIntervalSince1970: TimeInterval(vote.dateTo))
+        completion(date < Date())
+    }
+    
+    func winner(_ completion: @escaping (Position) -> ()) {
+        isEnded { [weak self] isEnded in
+            guard let strongSelf = self else { return }
+            if isEnded {
+                strongSelf.ref.child("votesCounter").child(strongSelf.vote.identifier).observe(.value) { snapshot in
+                    let firstCount = snapshot.childSnapshot(forPath: "firstItem").childrenCount
+                    let secondCount = snapshot.childSnapshot(forPath: "secondItem").childrenCount
+                    if firstCount < secondCount {
+                        completion(.right)
+                        return
+                    } else {
+                        completion(.left)
+                        return
+                    }
+                }
+            } else {
+                completion(.none)
+            }
+        }
+    }
 }
