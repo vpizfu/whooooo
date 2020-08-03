@@ -14,7 +14,7 @@ protocol CredentialInputPresenter {
     var confirmationCompletion: (() -> ())! {get set}
 }
 
-class InitialCredentialsViewController: BaseViewController, InitialCredentialsPresenterDelegate {
+class InitialCredentialsViewController: BaseViewController, InitialCredentialsPresenterDelegate, UITextFieldDelegate {
 
 
 
@@ -40,19 +40,25 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
     lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
+        textField.autocapitalizationType = .none
+        textField.delegate = self
         return textField
     }()
     
     lazy var passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.autocapitalizationType = .none
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
+        textField.delegate = self
         return textField
     }()
     
     lazy var loginTextField: UITextField = {
         let textField = UITextField()
+        textField.autocapitalizationType = .none
         textField.placeholder = "Login"
+        textField.delegate = self
         return textField
     }()
     
@@ -90,15 +96,20 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         return button
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 250/255, alpha: 1.0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         loginTextField.alpha = 0.0
         setupSignUpButton(button: signUpButton)
         setupForgotPasswordButton(button: forgotPasswordButton)
+        setupLoginTextField(textField: loginTextField)
         setupEmailTextField(textField: emailTextField)
         setupPasswordTextField(textField: passwordTextField)
-        setupPasswordTextFieldRepeat(textField: loginTextField)
         setupSignInLabel(label: signInLabel)
         setupSignInButton(button: signInButton)
         complexShape3()
@@ -108,6 +119,23 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         //signInButton.addTarget(presenter, action: #selector(presenter.signInTap), for: .touchUpInside)
         
 //<<<<<<< HEAD:whooooo/Flows/AuthorizationFlow/InitialCredentialsScene/View/InitialCredentialsViewController.swift
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -150
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,7 +165,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.leftAnchor.constraint(equalTo: passwordTextField.leftAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 55).isActive = true
+        label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55).isActive = true
 //        let labelTopAnchor = label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55)
 //        labelTopAnchor.priority = UILayoutPriority(rawValue: 250)
 //        labelTopAnchor.isActive = true
@@ -176,7 +204,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         textField.leftAnchor.constraint(equalTo: signUpButton.leftAnchor).isActive = true
         textField.rightAnchor.constraint(equalTo: forgotPasswordButton.rightAnchor).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 15).isActive = true
+        textField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 30).isActive = true
     }
     
     func setupPasswordTextField(textField: UITextField) {
@@ -188,13 +216,13 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         textField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30).isActive = true
     }
     
-    func setupPasswordTextFieldRepeat(textField: UITextField) {
+    func setupLoginTextField(textField: UITextField) {
         self.view.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.leftAnchor.constraint(equalTo: signUpButton.leftAnchor).isActive = true
         textField.rightAnchor.constraint(equalTo: forgotPasswordButton.rightAnchor).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 15).isActive = true
     }
     
 
