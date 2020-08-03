@@ -9,25 +9,27 @@
 import UIKit
 import FirebaseAuth
 
+typealias CompletionHandler = (_ error:Error?) -> Void
+
 protocol CredentialInputPresenter {
-    func authorizeCredentials(email: String, password: String, login: String?)
+    func authorizeCredentials(email: String, password: String, login: String?, completion: @escaping CompletionHandler)
     var confirmationCompletion: (() -> ())! {get set}
 }
 
 class InitialCredentialsViewController: BaseViewController, InitialCredentialsPresenterDelegate, UITextFieldDelegate {
-
-
-
+    
+    
+    
     enum AuthState {
         case signIn, signUp
     }
-
+    
     
     let presenter: CredentialInputPresenter!
     var currentState: AuthState = .signIn
     var layer:CAShapeLayer? = nil
     var layerWithTitle:CAShapeLayer? = nil
-        
+    
     init(presenter: CredentialInputPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -77,14 +79,14 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 50
         button.backgroundColor = UIColor(red: 129/255, green: 75/255, blue: 112/255, alpha: 1.0)
-//        button.addTarget(self, action: #selector(moveDown), for: .touchUpInside)
+        //        button.addTarget(self, action: #selector(moveDown), for: .touchUpInside)
         button.addTarget(self, action: #selector(authorizationTap), for: .touchUpInside)
         button.setImage(UIImage(named: "next")?.tint(with: UIColor.white), for: .normal)
         return button
     }()
     
     lazy var signUpButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
         button.addTarget(self, action: #selector(switchBetweenAuthorisationMethods), for: .touchUpInside)
         return button
@@ -115,10 +117,10 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         complexShape3()
         layerWithTitle = complexShape()
         layer = complexShape2()
-       // view.addSubview(signInButton)
+        // view.addSubview(signInButton)
         //signInButton.addTarget(presenter, action: #selector(presenter.signInTap), for: .touchUpInside)
         
-//<<<<<<< HEAD:whooooo/Flows/AuthorizationFlow/InitialCredentialsScene/View/InitialCredentialsViewController.swift
+        //<<<<<<< HEAD:whooooo/Flows/AuthorizationFlow/InitialCredentialsScene/View/InitialCredentialsViewController.swift
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
@@ -140,7 +142,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         let emailBottomLine = CALayer()
         emailBottomLine.frame = CGRect(x: 0.0, y: 30, width: 300, height: 1.0)
         emailBottomLine.backgroundColor = UIColor.lightGray.cgColor
@@ -166,9 +168,9 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.leftAnchor.constraint(equalTo: passwordTextField.leftAnchor).isActive = true
         label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55).isActive = true
-//        let labelTopAnchor = label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55)
-//        labelTopAnchor.priority = UILayoutPriority(rawValue: 250)
-//        labelTopAnchor.isActive = true
+        //        let labelTopAnchor = label.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 55)
+        //        labelTopAnchor.priority = UILayoutPriority(rawValue: 250)
+        //        labelTopAnchor.isActive = true
     }
     
     func setupForgotPasswordButton(button: UIButton) {
@@ -225,36 +227,36 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 15).isActive = true
     }
     
-
-     func complexShape() -> CAShapeLayer {
-            let path = UIBezierPath()
-            path.move(to: CGPoint(x: 0.0, y: 240))
-            path.addCurve(to: CGPoint(x: self.view.frame.size.width/2 - 50, y: 150),
-                          controlPoint1: CGPoint(x: self.view.frame.size.width - 100, y: 500),
-                          controlPoint2: CGPoint(x: self.view.frame.size.width-50, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: 20))
-            path.close()
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = path.cgPath
-            shapeLayer.fillColor = UIColor(red: 129/255, green: 75/255, blue: 112/255, alpha: 1.0).cgColor
-            self.view.layer.addSublayer(shapeLayer)
     
-            let label = CATextLayer()
-            label.frame = CGRect(x: 50, y: 165, width: 200, height: 40)
-            label.font = UIFont(name:"HelveticaNeue-Bold", size: 14.5)
-            //label.backgroundColor = UIColor.black.cgColor
-            label.string = "Welcome"
-    
-            let label2 = CATextLayer()
-            label2.frame = CGRect(x: 50, y: 205, width: 200, height: 40)
-            //label2.backgroundColor = UIColor.black.cgColor
-            label2.font = UIFont(name:"HelveticaNeue-Bold", size: 14.5)
-            label2.string = "Back"
-    
-            shapeLayer.addSublayer(label)
-            shapeLayer.addSublayer(label2)
-            return shapeLayer
-        }
+    func complexShape() -> CAShapeLayer {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0.0, y: 240))
+        path.addCurve(to: CGPoint(x: self.view.frame.size.width/2 - 50, y: 150),
+                      controlPoint1: CGPoint(x: self.view.frame.size.width - 100, y: 500),
+                      controlPoint2: CGPoint(x: self.view.frame.size.width-50, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 20))
+        path.close()
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = UIColor(red: 129/255, green: 75/255, blue: 112/255, alpha: 1.0).cgColor
+        self.view.layer.addSublayer(shapeLayer)
+        
+        let label = CATextLayer()
+        label.frame = CGRect(x: 50, y: 165, width: 200, height: 40)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 14.5)
+        //label.backgroundColor = UIColor.black.cgColor
+        label.string = "Welcome"
+        
+        let label2 = CATextLayer()
+        label2.frame = CGRect(x: 50, y: 205, width: 200, height: 40)
+        //label2.backgroundColor = UIColor.black.cgColor
+        label2.font = UIFont(name:"HelveticaNeue-Bold", size: 14.5)
+        label2.string = "Back"
+        
+        shapeLayer.addSublayer(label)
+        shapeLayer.addSublayer(label2)
+        return shapeLayer
+    }
     
     func changeLayerTitle(layer: CATextLayer, text:String) {
         let transition = CATransition()
@@ -271,8 +273,8 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
         
         if (currentState == .signIn) {
             currentState = .signUp
-//            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
-//            signInLabel.text = "Sigh up"
+            //            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign in", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            //            signInLabel.text = "Sigh up"
             
             changeLayerTitle(layer: layerOne, text: "Join us")
             changeLayerTitle(layer: layerTwo, text: "")
@@ -284,15 +286,15 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
                 self.signInLabel.text = "Sigh up"
             })
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.loginTextField.alpha = 1.0
+                self.loginTextField.alpha = 1.0
             })
         } else {
             currentState = .signIn
             changeLayerTitle(layer: layerOne, text: "Welcome")
             changeLayerTitle(layer: layerTwo, text: "Back")
             
-//            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
-//            signInLabel.text = "Sigh in"
+            //            signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
+            //            signInLabel.text = "Sigh in"
             UIView.transition(with: signUpButton, duration: 0.5, options: .transitionFlipFromTop, animations: {
                 self.signUpButton.setAttributedTitle(NSMutableAttributedString(string:"Sign Up", attributes:[NSAttributedString.Key.underlineStyle : 1]), for: .normal)
             })
@@ -300,57 +302,66 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
                 self.signInLabel.text = "Sigh in"
             })
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.loginTextField.alpha = 0.0
+                self.loginTextField.alpha = 0.0
             })
         }
     }
-
+    
     @objc func authorizationTap() {
-       if let email = emailTextField.text, let password = passwordTextField.text {
-           if currentState == .signUp, let login = loginTextField.text {
-               presenter.authorizeCredentials(email: email, password: password, login: login)
-               return
-           }
-            //moveDown()
-           presenter.authorizeCredentials(email: email, password: password, login: nil)
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            if currentState == .signUp {
+                let login = loginTextField.text
+                presenter.authorizeCredentials(email: email, password: password, login: login) { (error) in
+                    let alert = UIAlertController(title: "Registration failed", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                }
+                return
+            }
+                   
+                presenter.authorizeCredentials(email: email, password: password, login: nil) { (error) in
+                    let alert = UIAlertController(title: "Authorisation failed", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+            }
         }
     }
-
-    @objc func moveDown() {
-
-        let squarePath = UIBezierPath(roundedRect: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height), cornerRadius: 0)
-
-                let shapLayer = CAShapeLayer()
-                shapLayer.path = squarePath.cgPath
-                shapLayer.fillColor = UIColor(red: 239/255, green: 148/255, blue: 144/255, alpha: 1.0).cgColor
-                shapLayer.strokeColor = UIColor(red: 239/255, green: 148/255, blue: 144/255, alpha: 1.0).cgColor
-                shapLayer.lineWidth = 3
-                view.layer.addSublayer(shapLayer)
-
-
-        let animateOutlineFromBottom = CABasicAnimation(keyPath: "position")
-        animateOutlineFromBottom.fromValue = NSValue(cgPoint: CGPoint(x:0, y:0))
-        animateOutlineFromBottom.toValue = NSValue(cgPoint: CGPoint(x:0,y:self.view.frame.height))
-        animateOutlineFromBottom.duration =  0.5
-        animateOutlineFromBottom.fillMode = CAMediaTimingFillMode.forwards
-        shapLayer.add(animateOutlineFromBottom, forKey:"position")
-
-        let moveDown = CABasicAnimation(keyPath: "position.y")
-        moveDown.byValue = self.view.frame.height
-        moveDown.duration   = 0.5;
-        moveDown.isRemovedOnCompletion = false;
-        moveDown.fillMode   = CAMediaTimingFillMode.forwards;
-//        CATransaction.setCompletionBlock {
-//        }
-        layer!.add(moveDown, forKey: "y")
-    }
-
-
-    func complexShape2() -> CAShapeLayer {
+        
+        @objc func moveDown() {
+            
+            let squarePath = UIBezierPath(roundedRect: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height), cornerRadius: 0)
+            
+            let shapLayer = CAShapeLayer()
+            shapLayer.path = squarePath.cgPath
+            shapLayer.fillColor = UIColor(red: 239/255, green: 148/255, blue: 144/255, alpha: 1.0).cgColor
+            shapLayer.strokeColor = UIColor(red: 239/255, green: 148/255, blue: 144/255, alpha: 1.0).cgColor
+            shapLayer.lineWidth = 3
+            view.layer.addSublayer(shapLayer)
+            
+            
+            let animateOutlineFromBottom = CABasicAnimation(keyPath: "position")
+            animateOutlineFromBottom.fromValue = NSValue(cgPoint: CGPoint(x:0, y:0))
+            animateOutlineFromBottom.toValue = NSValue(cgPoint: CGPoint(x:0,y:self.view.frame.height))
+            animateOutlineFromBottom.duration =  0.5
+            animateOutlineFromBottom.fillMode = CAMediaTimingFillMode.forwards
+            shapLayer.add(animateOutlineFromBottom, forKey:"position")
+            
+            let moveDown = CABasicAnimation(keyPath: "position.y")
+            moveDown.byValue = self.view.frame.height
+            moveDown.duration   = 0.5;
+            moveDown.isRemovedOnCompletion = false;
+            moveDown.fillMode   = CAMediaTimingFillMode.forwards;
+            //        CATransaction.setCompletionBlock {
+            //        }
+            layer!.add(moveDown, forKey: "y")
+        }
+        
+        
+        func complexShape2() -> CAShapeLayer {
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-
-
+            
+            
             path.addLine(to: CGPoint(x: self.view.frame.size.width, y: 0.0))
             path.addCurve(to: CGPoint(x: self.view.frame.size.width/2 - 50, y: 150),
                           controlPoint1: CGPoint(x: self.view.frame.size.width + 50.0, y: 350),
@@ -358,44 +369,44 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
             path.addLine(to: CGPoint(x: 0, y: 50))
             //path.addLine(to: CGPoint(x: 0.0, y: self.view.frame.size.height))
             path.close()
-
+            
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = path.cgPath
             shapeLayer.fillColor = UIColor(red: 239/255, green: 148/255, blue: 144/255, alpha: 1.0).cgColor
             self.view.layer.addSublayer(shapeLayer)
             return shapeLayer
         }
-
-    func complexShape3() {
-        let path = UIBezierPath()
-        path.addArc(withCenter: CGPoint(x: self.view.frame.size.width - 50, y: 100),
-                    radius: 200,
-                    startAngle: CGFloat(180.0).toRadians(),
-                    endAngle: CGFloat(0).toRadians(),
-                    clockwise: false)
-        path.close()
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor(red: 230/255, green: 210/255, blue: 121/255, alpha: 1.0).cgColor
-        self.view.layer.addSublayer(shapeLayer)
+        
+        func complexShape3() {
+            let path = UIBezierPath()
+            path.addArc(withCenter: CGPoint(x: self.view.frame.size.width - 50, y: 100),
+                        radius: 200,
+                        startAngle: CGFloat(180.0).toRadians(),
+                        endAngle: CGFloat(0).toRadians(),
+                        clockwise: false)
+            path.close()
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = path.cgPath
+            shapeLayer.fillColor = UIColor(red: 230/255, green: 210/255, blue: 121/255, alpha: 1.0).cgColor
+            self.view.layer.addSublayer(shapeLayer)
+        }
     }
-}
     
     extension CGFloat {
         func toRadians() -> CGFloat {
             return self * CGFloat(Double.pi) / 180.0
         }
-}
-
-extension UIImage {
-    func tint(with color: UIColor) -> UIImage {
-        var image = withRenderingMode(.alwaysTemplate)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        color.set()
-
-        image.draw(in: CGRect(origin: .zero, size: size))
-        image = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
     }
+    
+    extension UIImage {
+        func tint(with color: UIColor) -> UIImage {
+            var image = withRenderingMode(.alwaysTemplate)
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            color.set()
+            
+            image.draw(in: CGRect(origin: .zero, size: size))
+            image = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return image
+        }
 }

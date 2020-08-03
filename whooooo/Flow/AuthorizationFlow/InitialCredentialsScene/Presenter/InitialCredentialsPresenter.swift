@@ -12,7 +12,10 @@ protocol InitialCredentialsPresenterDelegate {
     
 }
 
+
 class InitialCredentialsPresenter: CredentialInputPresenter {
+    
+    
     
     var confirmationCompletion: (() -> ())!
     let service: AuthenticationService
@@ -21,16 +24,20 @@ class InitialCredentialsPresenter: CredentialInputPresenter {
         self.service = service
     }
     
-    func authorizeCredentials(email: String, password: String, login: String?) {
+  
+    
+    func authorizeCredentials(email: String, password: String, login: String?, completion: @escaping (Error?) -> Void) {
         if let login = login {
             service.signUpCredentials(email: email, password: password, login: login) { [weak self] (error) in
-                guard error == nil else { return }
+                guard error == nil else { completion(error); return }
                 self?.confirmationCompletion()
                 return
             }
+            return
         }
+        
         service.signInCredentials(email: email, password: password) { [weak self] (error) in
-            guard error == nil else { return }
+            guard error == nil else { completion(error); return }
             self?.confirmationCompletion()
         }
     }
