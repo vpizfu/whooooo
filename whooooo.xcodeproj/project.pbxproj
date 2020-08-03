@@ -24,7 +24,6 @@
 		2BBA0C7E24D4C757006A5CAE /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C7D24D4C757006A5CAE /* AuthenticationService.swift */; };
 		2BBA0C9224D4F794006A5CAE /* VotesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9124D4F794006A5CAE /* VotesCollectionCell.swift */; };
 		2BBA0C9424D4F818006A5CAE /* VotesCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9324D4F818006A5CAE /* VotesCollectionPresenter.swift */; };
-		2BBA0C9724D4F870006A5CAE /* VotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9624D4F870006A5CAE /* VotesService.swift */; };
 		2BBA0C9A24D4FEBE006A5CAE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9924D4FEBE006A5CAE /* Models.swift */; };
 		2BBA0C9C24D513F8006A5CAE /* ContentFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0C9B24D513F8006A5CAE /* ContentFlowCoordinator.swift */; };
 		2BBA0CA124D51619006A5CAE /* DetailVoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBA0CA024D51619006A5CAE /* DetailVoteViewController.swift */; };
@@ -73,7 +72,6 @@
 		2BBA0C7D24D4C757006A5CAE /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		2BBA0C9124D4F794006A5CAE /* VotesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesCollectionCell.swift; sourceTree = "<group>"; };
 		2BBA0C9324D4F818006A5CAE /* VotesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesCollectionPresenter.swift; sourceTree = "<group>"; };
-		2BBA0C9624D4F870006A5CAE /* VotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesService.swift; sourceTree = "<group>"; };
 		2BBA0C9924D4FEBE006A5CAE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		2BBA0C9B24D513F8006A5CAE /* ContentFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFlowCoordinator.swift; sourceTree = "<group>"; };
 		2BBA0CA024D51619006A5CAE /* DetailVoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVoteViewController.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 		2BBA0C7B24D4C746006A5CAE /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2BBA0C9524D4F85C006A5CAE /* DataService */,
 				2BBA0C7C24D4C74A006A5CAE /* Authentication */,
 			);
 			path = Service;
@@ -286,14 +283,6 @@
 				2BBA0CB424D56E44006A5CAE /* InitialCredentialsScene */,
 			);
 			path = AuthorizationFlow;
-			sourceTree = "<group>";
-		};
-		2BBA0C9524D4F85C006A5CAE /* DataService */ = {
-			isa = PBXGroup;
-			children = (
-				2BBA0C9624D4F870006A5CAE /* VotesService.swift */,
-			);
-			path = DataService;
 			sourceTree = "<group>";
 		};
 		2BBA0C9824D4FEB5006A5CAE /* Model */ = {
@@ -609,7 +598,6 @@
 				2BBA0CAB24D548C2006A5CAE /* AsyncOperation.swift in Sources */,
 				2BBA0CB824D56E9D006A5CAE /* InitialCredentialsViewController.swift in Sources */,
 				2BBA0CBE24D57131006A5CAE /* WButton.swift in Sources */,
-				2BBA0C9724D4F870006A5CAE /* VotesService.swift in Sources */,
 				2BBA0C6824D4BB3C006A5CAE /* AppCoordinator.swift in Sources */,
 				2BBA0C7724D4C5E7006A5CAE /* StartViewController.swift in Sources */,
 				2BBA0CA624D51B5D006A5CAE /* ThumbStorage.swift in Sources */,

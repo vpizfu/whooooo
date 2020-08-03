@@ -13,8 +13,6 @@ import FirebaseAuth
 
 protocol DetailVotePresenterDelegate {
     
-    func shouldHighlight(_ item: DetailVotePresenter.Position)
-    
 }
 
 class DetailVotePresenter {
@@ -37,7 +35,7 @@ class DetailVotePresenter {
     }
     
     func imageForPosition(_ position: Position, completion: @escaping (Data) -> ()) {
-        let url = position == .left ? self.vote.firstItem : self.vote.secondItem
+        let url = position == .left ? self.vote.secondItem : self.vote.firstItem
         ThumbStorage.shared.fetchAsyncOnURL(URL(string: url)!, completion: completion)
     }
     
@@ -78,15 +76,40 @@ class DetailVotePresenter {
     }
     
     @objc func leftItemSelected() {
-        ref.child("votesCounter").child(vote.identifier).child("firstItem").child(Auth.auth().currentUser!.uid).setValue(1)
+        voteForChild(.firstItem)
     }
     
     @objc func rightItemSelected() {
-        
-        ref.child("votesCounter").child(vote.identifier).observe(.value) { (snapshot) in
-
+        voteForChild(.secondItem)
+    }
+    
+    func voteForChild(_ child: Childs) {
+        let validityChild: Childs = child == .firstItem ? .secondItem : .firstItem
+        checkEntryFor(validityChild) { [weak self] isEntry in
+            guard let voteId = self?.vote.identifier, let userId = Auth.auth().currentUser?.uid else { return }
+            if !isEntry {
+                self?.ref.child("votesCounter").child(voteId).child(child.rawValue).child(userId).setValue(1)
+            }
         }
-        ref.child("votesCounter").child(vote.identifier).child("secondItem").child(Auth.auth().currentUser!.uid).setValue(1)
+    }
+    
+    func checkEntryFor(_ item: Childs, _ completion: @escaping (Bool) -> ()) {
+        guard let identifier = AuthenticationManager().currentUserIdentifier() else { return }
+        ref.child("votesCounter").child(vote.identifier).observe(.value) { (snapshot) in
+            completion(snapshot.childSnapshot(forPath: item.rawValue).hasChild(identifier))
+        }
+    }
+    
+    func firstItemSelected(_ completion: @escaping (Bool) -> ()) {
+        checkEntryFor(.firstItem) { (isSelected) in
+            completion(isSelected)
+        }
+    }
+    
+    func secondItemSelected(_ completion: @escaping (Bool) -> ()) {
+        checkEntryFor(.secondItem) { (isSelected) in
+            completion(isSelected)
+        }
     }
     
     func checkEntry(child: Childs, completion: @escaping () -> ()) {
@@ -114,10 +137,14 @@ class DetailVotePresenter {
         }
     }
     
-    func setupAppearance() {
-        checkEntry(child: .both) { [weak self] in
-            
+    func totalVotesCount(_ completion: @escaping (String) -> ()) {
+        ref.child("votesCounter").child(vote.identifier).observe(.value) { snapshot in
+            let leftBranch = snapshot.childSnapshot(forPath: "firstItem").childrenCount
+            let rightBranch = snapshot.childSnapshot(forPath: "secondItem").childrenCount
+            completion("\(leftBranch + rightBranch)")
         }
+        
+        
     }
     
 }
