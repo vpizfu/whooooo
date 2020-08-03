@@ -34,6 +34,7 @@ class LoginFragment : MvpAppCompatFragment(), LoginView {
         binding.toRegBtn.setOnClickListener {
             presenter.toRegistration()
         }
+        binding.toResetPassBtn.setOnClickListener { presenter.toPasswordRecovery() }
         return binding.root
     }
 
@@ -43,7 +44,7 @@ class LoginFragment : MvpAppCompatFragment(), LoginView {
     }
 
     override fun onLoginSuccess() {
-        Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+       findNavController().navigate(R.id.action_global_voteListFragment)
     }
 
     override fun proceedToRegistration() {
@@ -60,6 +61,10 @@ class LoginFragment : MvpAppCompatFragment(), LoginView {
 
     override fun onPassError(error: String?) {
         binding.inputPassLayout.error = error
+    }
+
+    override fun proceedToRecovery() {
+        findNavController().navigate(R.id.action_loginFragment_to_resetPassFragment)
     }
 
 }

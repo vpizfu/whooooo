@@ -20,4 +20,7 @@ interface LoginView : MvpView{
 
     @AddToEndSingle
     fun onPassError(error: String?)
+
+    @Skip
+    fun proceedToRecovery()
 }

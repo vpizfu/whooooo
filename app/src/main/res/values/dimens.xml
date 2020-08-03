@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_dimen">16dp</dimen>
+    <dimen name="large_dimen">32dp</dimen>
+    <dimen name="design_height">250dp</dimen>
+    <dimen name="title_txt_size">34sp</dimen>
+</resources>

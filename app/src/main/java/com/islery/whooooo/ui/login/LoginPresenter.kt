@@ -21,6 +21,10 @@ class LoginPresenter : MvpPresenter<LoginView>(){
         viewState.proceedToRegistration()
     }
 
+    fun toPasswordRecovery(){
+        viewState.proceedToRecovery()
+    }
+
     private fun validateEmail(email: String): Boolean {
         return when {
             email.isEmpty() -> {
