@@ -107,6 +107,7 @@ class InitialCredentialsViewController: BaseViewController, InitialCredentialsPr
        // view.addSubview(signInButton)
         //signInButton.addTarget(presenter, action: #selector(presenter.signInTap), for: .touchUpInside)
         
+//<<<<<<< HEAD:whooooo/Flows/AuthorizationFlow/InitialCredentialsScene/View/InitialCredentialsViewController.swift
     }
     
     override func viewDidAppear(_ animated: Bool) {

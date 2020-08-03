@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SideMenu
 
 class ContentFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
@@ -19,17 +20,29 @@ class ContentFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let presenter = VotesCollectionPresenter()
-        let controller = VotesCollectionController(presenter: presenter)
+//        let container = ManageSplitController()
         
+        let presenter = VotesCollectionPresenter()
+        
+        let contentController = VotesCollectionController(presenter: presenter)
+        let contentNav = UINavigationController(rootViewController:contentController)
+        
+        let menuController = MenuViewController()
+        let menuNav = SideMenuNavigationController(rootViewController: menuController)
         
         presenter.selectionCompletion = { [weak self] vote in
             self?.showDetailSceneForVote(vote)
         }
         
-        self.navigationController.setViewControllers([controller], animated: true)
-        controller.showNavigationBar()
-        controller.navigationController?.navigationItem.backBarButtonItem = nil
+        SideMenuManager.default.leftMenuNavigationController = menuNav
+        SideMenuManager.default.addPanGestureToPresent(toView: menuNav.navigationBar)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: contentController.view)
+//        container.viewControllers = [menuNav, contentNav]
+//
+//        container.modalPresentationStyle = .fullScreen
+        
+        self.navigationController.setViewControllers([contentController], animated: true)
+        contentController.showNavigationBar()
     }
     
     func showDetailSceneForVote(_ vote: VoteObject) {
